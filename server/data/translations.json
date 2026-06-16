@@ -1,0 +1,122 @@
+[
+  {
+    "key": "welcome",
+    "namespace": "common",
+    "description": "欢迎语",
+    "translations": {
+      "zh-CN": "欢迎使用多语言内容管理系统",
+      "en-US": "Welcome to the i18n CMS",
+      "ja-JP": ""
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "home",
+    "namespace": "common",
+    "description": "首页",
+    "translations": {
+      "zh-CN": "首页",
+      "en-US": "Home",
+      "ja-JP": "ホーム"
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "settings",
+    "namespace": "common",
+    "description": "设置",
+    "translations": {
+      "zh-CN": "设置",
+      "en-US": "Settings",
+      "ja-JP": ""
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "save",
+    "namespace": "common",
+    "description": "保存按钮",
+    "translations": {
+      "zh-CN": "保存",
+      "en-US": "Save",
+      "ja-JP": "保存"
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "cancel",
+    "namespace": "common",
+    "description": "取消按钮",
+    "translations": {
+      "zh-CN": "取消",
+      "en-US": "Cancel",
+      "ja-JP": "キャンセル"
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "title",
+    "namespace": "dashboard",
+    "description": "仪表盘标题",
+    "translations": {
+      "zh-CN": "仪表盘",
+      "en-US": "Dashboard",
+      "ja-JP": "ダッシュボード"
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "totalUsers",
+    "namespace": "dashboard",
+    "description": "用户总数",
+    "translations": {
+      "zh-CN": "用户总数",
+      "en-US": "Total Users",
+      "ja-JP": ""
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "greeting.morning",
+    "namespace": "greeting",
+    "description": "早上问候语",
+    "translations": {
+      "zh-CN": "早上好",
+      "en-US": "Good morning",
+      "ja-JP": "おはようございます"
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "greeting.afternoon",
+    "namespace": "greeting",
+    "description": "下午问候语",
+    "translations": {
+      "zh-CN": "下午好",
+      "en-US": "Good afternoon",
+      "ja-JP": ""
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  },
+  {
+    "key": "greeting.evening",
+    "namespace": "greeting",
+    "description": "晚上问候语",
+    "translations": {
+      "zh-CN": "晚上好",
+      "en-US": "Good evening",
+      "ja-JP": "こんばんは"
+    },
+    "createdAt": "2026-06-16T21:51:15.711Z",
+    "updatedAt": "2026-06-16T21:51:15.711Z"
+  }
+]
