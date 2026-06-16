@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 import { localeApi, languagesApi } from '../services/api';
-import type { Language, LanguageWithProgress } from '../types';
+import type { Language, LanguageWithProgress, KeySource } from '../types';
 
 interface I18nContextType {
   locale: string;
@@ -10,6 +10,7 @@ interface I18nContextType {
   isLoading: boolean;
   setLocale: (lang: string) => void;
   t: (key: string, params?: Record<string, string | number>) => string;
+  getSource: (key: string) => KeySource;
   isFallback: (key: string) => boolean;
 }
 
@@ -23,19 +24,6 @@ function detectBrowserLanguage(supportedLanguages: Language[]): string {
     (l) => l.code === browserLang || l.code.startsWith(browserLang.split('-')[0])
   );
   return matched?.code || 'zh-CN';
-}
-
-function flattenNested(obj: Record<string, any>, prefix = ''): Record<string, string> {
-  const result: Record<string, string> = {};
-  for (const key of Object.keys(obj)) {
-    const newKey = prefix ? `${prefix}.${key}` : key;
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
-      Object.assign(result, flattenNested(obj[key], newKey));
-    } else {
-      result[newKey] = String(obj[key]);
-    }
-  }
-  return result;
 }
 
 function formatMessage(message: string, params?: Record<string, string | number>): string {
@@ -53,25 +41,42 @@ export function I18nProvider({ children }: I18nProviderProps) {
   const [locale, setLocaleState] = useState<string>('zh-CN');
   const [defaultLocale, setDefaultLocale] = useState<string>('zh-CN');
   const [messages, setMessages] = useState<Record<string, string>>({});
-  const [defaultMessages, setDefaultMessages] = useState<Record<string, string>>({});
+  const [keySources, setKeySources] = useState<Record<string, KeySource>>({});
   const [languages, setLanguages] = useState<Language[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const loadBundle = useCallback(async (lang: string, defaultLang: string) => {
     setIsLoading(true);
     try {
-      const [targetRes, defaultRes] = await Promise.all([
-        localeApi.getBundle(lang, 'flat', defaultLang),
-        defaultLang !== lang ? localeApi.getBundle(defaultLang, 'flat') : Promise.resolve(null),
-      ]);
+      const baseRes = await localeApi.getBundle(defaultLang, 'flat');
+      const baseMessages: Record<string, string> = {};
+      const sources: Record<string, KeySource> = {};
 
-      const targetMessages = flattenNested(targetRes.bundle as Record<string, any>);
-      setMessages(targetMessages);
+      for (const [k, v] of Object.entries(baseRes.bundle as Record<string, any>)) {
+        baseMessages[k] = String(v);
+        sources[k] = 'default';
+      }
 
-      if (defaultRes) {
-        setDefaultMessages(flattenNested(defaultRes.bundle as Record<string, any>));
+      if (lang === defaultLang) {
+        setMessages(baseMessages);
+        setKeySources(sources);
       } else {
-        setDefaultMessages(targetMessages);
+        const diffRes = await localeApi.getDiff(lang);
+
+        const merged = { ...baseMessages };
+        const mergedSources = { ...sources };
+
+        for (const [k] of Object.entries(merged)) {
+          mergedSources[k] = 'fallback';
+        }
+
+        for (const [k, v] of Object.entries(diffRes.diff)) {
+          merged[k] = v;
+          mergedSources[k] = 'diff';
+        }
+
+        setMessages(merged);
+        setKeySources(mergedSources);
       }
     } catch (error) {
       console.error('Failed to load locale bundle:', error);
@@ -95,8 +100,21 @@ export function I18nProvider({ children }: I18nProviderProps) {
         setDefaultLocale(defLocale);
 
         const savedLocale = localStorage.getItem(STORAGE_KEY);
-        const browserLang = detectBrowserLanguage(enabledLangs);
-        const initialLocale = savedLocale || browserLang || defLocale;
+        let initialLocale = defLocale;
+
+        if (savedLocale) {
+          const isStillValid = enabledLangs.some((l: Language) => l.code === savedLocale);
+          if (isStillValid) {
+            initialLocale = savedLocale;
+          } else {
+            localStorage.removeItem(STORAGE_KEY);
+          }
+        } else {
+          const browserLang = detectBrowserLanguage(enabledLangs);
+          if (enabledLangs.some((l: Language) => l.code === browserLang)) {
+            initialLocale = browserLang;
+          }
+        }
 
         setLocaleState(initialLocale);
         await loadBundle(initialLocale, defLocale);
@@ -112,11 +130,15 @@ export function I18nProvider({ children }: I18nProviderProps) {
   const setLocale = useCallback(
     async (lang: string) => {
       if (lang === locale) return;
+      const isValid = languages.some((l) => l.code === lang && l.isEnabled);
+      if (!isValid) {
+        lang = defaultLocale;
+      }
       localStorage.setItem(STORAGE_KEY, lang);
       setLocaleState(lang);
       await loadBundle(lang, defaultLocale);
     },
-    [locale, defaultLocale, loadBundle]
+    [locale, defaultLocale, loadBundle, languages]
   );
 
   const t = useCallback(
@@ -125,17 +147,23 @@ export function I18nProvider({ children }: I18nProviderProps) {
       if (message !== undefined && message !== '') {
         return formatMessage(message, params);
       }
-      const fallback = defaultMessages[key] || key;
-      return formatMessage(fallback, params);
+      return formatMessage(key, params);
     },
-    [messages, defaultMessages]
+    [messages]
+  );
+
+  const getSource = useCallback(
+    (key: string): KeySource => {
+      return keySources[key] || 'fallback';
+    },
+    [keySources]
   );
 
   const isFallback = useCallback(
     (key: string): boolean => {
-      return !messages[key] || messages[key] === '';
+      return keySources[key] === 'fallback';
     },
-    [messages]
+    [keySources]
   );
 
   return (
@@ -148,6 +176,7 @@ export function I18nProvider({ children }: I18nProviderProps) {
         isLoading,
         setLocale,
         t,
+        getSource,
         isFallback,
       }}
     >

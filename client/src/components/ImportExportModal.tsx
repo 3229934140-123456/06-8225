@@ -1,11 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Modal, Tabs, Button, Upload, message, Space, Select, Typography } from 'antd';
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/es/upload/interface';
 import { ioApi } from '../services/api';
+import { useI18n } from '../i18n/I18nProvider';
 
 const { Text } = Typography;
-const { Option } = Select;
 
 interface ImportExportModalProps {
   open: boolean;
@@ -20,12 +20,12 @@ export default function ImportExportModal({
   onClose,
   onSuccess,
 }: ImportExportModalProps) {
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState<string>('export');
   const [exportFormat, setExportFormat] = useState<'nested' | 'flat'>('nested');
   const [importFile, setImportFile] = useState<UploadFile | null>(null);
   const [mergeMode, setMergeMode] = useState<boolean>(true);
   const [loading, setLoading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleExport = () => {
     const url = ioApi.export(langCode, exportFormat);
@@ -33,25 +33,23 @@ export default function ImportExportModal({
     link.href = url;
     link.download = `${langCode}.json`;
     link.click();
-    message.success('导出成功');
+    message.success(t('common.operationSuccess'));
   };
 
   const handleImport = async () => {
     if (!importFile || !importFile.originFileObj) {
-      message.error('请选择文件');
+      message.error(t('io.selectFile'));
       return;
     }
 
     setLoading(true);
     try {
       const result = await ioApi.import(langCode, importFile.originFileObj, mergeMode);
-      message.success(
-        `导入成功：新增 ${result.added} 条，更新 ${result.updated} 条`
-      );
+      message.success(t('common.operationSuccess'));
       onSuccess?.();
       onClose();
     } catch (error: any) {
-      message.error(error.message || '导入失败');
+      message.error(t('common.operationFailed'));
     } finally {
       setLoading(false);
     }
@@ -60,43 +58,27 @@ export default function ImportExportModal({
   const tabItems = [
     {
       key: 'export',
-      label: '导出',
+      label: t('io.exportTitle'),
       children: (
         <div style={{ padding: '16px 0' }}>
           <Space direction="vertical" style={{ width: '100%' }}>
             <div>
-              <Text type="secondary">导出格式：</Text>
+              <Text type="secondary">{t('io.exportFormat')}：</Text>
               <Select
                 value={exportFormat}
                 onChange={setExportFormat as any}
                 style={{ width: 200, marginLeft: 12 }}
               >
-                <Option value="nested">嵌套结构 (nested)</Option>
-                <Option value="flat">扁平结构 (flat)</Option>
+                <Select.Option value="nested">{t('io.nested')}</Select.Option>
+                <Select.Option value="flat">{t('io.flat')}</Select.Option>
               </Select>
-            </div>
-            <div style={{ color: '#999', fontSize: 12 }}>
-              <p>嵌套结构示例：</p>
-              <pre style={{ background: '#f5f5f5', padding: 8, borderRadius: 4 }}>
-{`{
-  "greeting": {
-    "morning": "早上好"
-  }
-}`}
-              </pre>
-              <p>扁平结构示例：</p>
-              <pre style={{ background: '#f5f5f5', padding: 8, borderRadius: 4 }}>
-{`{
-  "greeting.morning": "早上好"
-}`}
-              </pre>
             </div>
             <Button
               type="primary"
               icon={<DownloadOutlined />}
               onClick={handleExport}
             >
-              导出 {langCode}.json
+              {t('io.exportTitle')} {langCode}.json
             </Button>
           </Space>
         </div>
@@ -104,19 +86,19 @@ export default function ImportExportModal({
     },
     {
       key: 'import',
-      label: '导入',
+      label: t('io.importTitle'),
       children: (
         <div style={{ padding: '16px 0' }}>
           <Space direction="vertical" style={{ width: '100%' }}>
             <div>
-              <Text type="secondary">导入模式：</Text>
+              <Text type="secondary">{t('io.importMode')}：</Text>
               <Select
                 value={mergeMode}
                 onChange={setMergeMode}
-                style={{ width: 200, marginLeft: 12 }}
+                style={{ width: 260, marginLeft: 12 }}
               >
-                <Option value={true}>合并模式（保留现有翻译）</Option>
-                <Option value={false}>覆盖模式（替换全部翻译）</Option>
+                <Select.Option value={true}>{t('io.merge')}</Select.Option>
+                <Select.Option value={false}>{t('io.overwrite')}</Select.Option>
               </Select>
             </div>
             <Upload
@@ -133,10 +115,10 @@ export default function ImportExportModal({
               accept=".json"
               onRemove={() => setImportFile(null)}
             >
-              <Button icon={<UploadOutlined />}>选择 JSON 文件</Button>
+              <Button icon={<UploadOutlined />}>{t('io.selectFile')}</Button>
             </Upload>
             {importFile && (
-              <Text type="success">已选择：{importFile.name}</Text>
+              <Text type="success">{importFile.name}</Text>
             )}
             <Button
               type="primary"
@@ -144,7 +126,7 @@ export default function ImportExportModal({
               loading={loading}
               disabled={!importFile}
             >
-              开始导入
+              {t('io.startImport')}
             </Button>
           </Space>
         </div>
@@ -154,7 +136,7 @@ export default function ImportExportModal({
 
   return (
     <Modal
-      title={`语言 ${langCode} - 导入/导出`}
+      title={`${t('io.title')} - ${langCode}`}
       open={open}
       onCancel={onClose}
       footer={null}

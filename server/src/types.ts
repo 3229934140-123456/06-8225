@@ -12,6 +12,7 @@ export interface TranslationEntry {
   namespace: string;
   description?: string;
   translations: Record<string, string>;
+  completed: Record<string, boolean>;
   createdAt: string;
   updatedAt: string;
 }
@@ -19,7 +20,9 @@ export interface TranslationEntry {
 export interface TranslationProgress {
   total: number;
   translated: number;
+  completed: number;
   percentage: number;
+  completedPercentage: number;
 }
 
 export interface LanguageWithProgress extends Language {
@@ -36,3 +39,5 @@ export interface ImportResult {
   skipped: number;
   errors: string[];
 }
+
+export type TranslationStatus = 'unfilled' | 'filled' | 'completed';

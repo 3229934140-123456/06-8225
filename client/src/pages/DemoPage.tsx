@@ -1,17 +1,28 @@
-import { Card, Typography, Space, Tag, Button, Divider, Alert, Row, Col } from 'antd';
+import { Card, Typography, Space, Tag, Button, Alert, Row, Col } from 'antd';
 import { useI18n } from '../i18n/I18nProvider';
+import type { KeySource } from '../types';
 
 const { Title, Paragraph, Text } = Typography;
 
+const sourceColorMap: Record<KeySource, string> = {
+  default: 'blue',
+  diff: 'green',
+  fallback: 'orange',
+};
+
+const sourceLabelKeyMap: Record<KeySource, string> = {
+  default: 'language.default',
+  diff: 'demo.fromDiff',
+  fallback: 'demo.fromFallback',
+};
+
 export default function DemoPage() {
-  const { t, isFallback, locale, defaultLocale, setLocale, languages, isLoading } = useI18n();
+  const { t, getSource, locale, defaultLocale, setLocale, languages, isLoading } = useI18n();
 
   const demoKeys = [
     'welcome',
     'home',
     'settings',
-    'save',
-    'cancel',
     'dashboard.title',
     'dashboard.totalUsers',
     'greeting.morning',
@@ -19,19 +30,20 @@ export default function DemoPage() {
     'greeting.evening',
   ];
 
+  const isDefaultLang = locale === defaultLocale;
+
   return (
     <div>
-      <Title level={4}>多语言演示页面</Title>
+      <Title level={4}>{t('demo.page')}</Title>
 
       <Alert
-        message="功能说明"
+        message={t('demo.featureInfo')}
         description={
           <div>
-            <p>本页面演示多语言系统的核心功能：</p>
             <ul>
-              <li>根据浏览器语言或手动切换加载对应语言包</li>
-              <li>翻译缺失时自动 fallback 到默认语言（{defaultLocale}）</li>
-              <li>支持动态合并基础语言包和差异语言包</li>
+              <li>{t('demo.featureDesc1')}</li>
+              <li>{t('demo.featureDesc2')}（{defaultLocale}）</li>
+              <li>{t('demo.featureDesc3')}</li>
             </ul>
           </div>
         }
@@ -40,7 +52,7 @@ export default function DemoPage() {
         style={{ marginBottom: 24 }}
       />
 
-      <Card title="语言切换" style={{ marginBottom: 24 }}>
+      <Card title={t('demo.langSwitch')} style={{ marginBottom: 24 }}>
         <Space wrap>
           {languages.map((lang) => (
             <Button
@@ -54,53 +66,59 @@ export default function DemoPage() {
           ))}
         </Space>
         <Paragraph style={{ marginTop: 16, marginBottom: 0 }}>
-          当前语言: <Text strong>{locale}</Text>
-          ，默认语言: <Text strong>{defaultLocale}</Text>
+          {t('demo.currentLang')}: <Text strong>{locale}</Text>
+          ，{t('demo.defaultLang')}: <Text strong>{defaultLocale}</Text>
         </Paragraph>
       </Card>
 
-      <Card title="翻译展示（含 Fallback 标识）">
+      <Card title={t('demo.translationDisplay')} style={{ marginBottom: 24 }}>
+        {!isDefaultLang && (
+          <div style={{ marginBottom: 16, display: 'flex', gap: 12 }}>
+            <Tag color="green">{t('demo.fromDiff')}</Tag>
+            <Tag color="orange">{t('demo.fromFallback')}</Tag>
+            <Tag color="blue">{t('language.default')}</Tag>
+          </div>
+        )}
         <Row gutter={[16, 16]}>
-          {demoKeys.map((key) => (
-            <Col span={12} key={key}>
-              <Card size="small" title={<code>{key}</code>}>
-                <Space direction="vertical" style={{ width: '100%' }}>
-                  <div>
-                    <Text type="secondary">翻译结果：</Text>
-                    <br />
-                    {isFallback(key) ? (
-                      <span className="fallback-text">{t(key)}</span>
-                    ) : (
-                      <Text strong>{t(key)}</Text>
+          {demoKeys.map((key) => {
+            const source = getSource(key);
+            const color = sourceColorMap[source];
+            const label = t(sourceLabelKeyMap[source]);
+
+            return (
+              <Col span={12} key={key}>
+                <Card size="small" title={<code>{key}</code>}>
+                  <Space direction="vertical" style={{ width: '100%' }}>
+                    <div>
+                      <Text type="secondary">{t('demo.translationResult')}：</Text>
+                      <br />
+                      <Text strong style={{ fontSize: 15 }}>{t(key)}</Text>
+                    </div>
+                    {!isDefaultLang && (
+                      <Tag color={color}>{label}</Tag>
                     )}
-                  </div>
-                  {isFallback(key) && (
-                    <Tag color="orange">Fallback 到默认语言</Tag>
-                  )}
-                  {!isFallback(key) && <Tag color="green">已翻译</Tag>}
-                </Space>
-              </Card>
-            </Col>
-          ))}
+                  </Space>
+                </Card>
+              </Col>
+            );
+          })}
         </Row>
       </Card>
 
-      <Divider />
-
-      <Card title="带参数的翻译示例">
+      <Card title={t('demo.paramExample')}>
         <Paragraph>
-          支持插值参数，例如 <code>{`{name}，欢迎回来`}</code>
+          {t('demo.featureDesc3')}
         </Paragraph>
         <Space direction="vertical">
           <div>
-            <Text type="secondary">无参数示例 (welcome):</Text>
+            <Text type="secondary">{t('demo.noParam')} (welcome):</Text>
             <br />
             <Text strong>{t('welcome')}</Text>
           </div>
           <div>
-            <Text type="secondary">模拟带参数 (假设模板为 "你好，&#123;name&#125;"):</Text>
+            <Text type="secondary">{t('demo.withParam')}:</Text>
             <br />
-            <Text strong>{t('welcome', { name: '张三' })}</Text>
+            <Text strong>{t('welcome', { name: 'Trae' })}</Text>
           </div>
         </Space>
       </Card>

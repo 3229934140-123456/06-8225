@@ -8,17 +8,24 @@ function calculateProgress(langCode: string): TranslationProgress {
   const translations = readTranslations();
   const total = translations.length;
   let translated = 0;
+  let completed = 0;
 
   for (const t of translations) {
-    if (t.translations[langCode] && t.translations[langCode].trim() !== '') {
+    const val = t.translations[langCode];
+    if (val && val.trim() !== '') {
       translated++;
+      if (t.completed && t.completed[langCode]) {
+        completed++;
+      }
     }
   }
 
   return {
     total,
     translated,
+    completed,
     percentage: total === 0 ? 100 : Math.round((translated / total) * 100),
+    completedPercentage: total === 0 ? 100 : Math.round((completed / total) * 100),
   };
 }
 
@@ -65,11 +72,17 @@ router.post('/', (req, res) => {
     if (!t.translations[code]) {
       t.translations[code] = '';
     }
+    if (!t.completed) {
+      t.completed = {};
+    }
+    if (t.completed[code] === undefined) {
+      t.completed[code] = false;
+    }
   });
 
   res.status(201).json({
     ...newLanguage,
-    progress: { total: translations.length, translated: 0, percentage: 0 },
+    progress: { total: translations.length, translated: 0, completed: 0, percentage: 0, completedPercentage: 0 },
   });
 });
 

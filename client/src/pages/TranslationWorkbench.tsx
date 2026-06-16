@@ -12,29 +12,36 @@ import {
   Typography,
   Tooltip,
   Empty,
+  Popconfirm,
 } from 'antd';
-import { PlusOutlined, FilterOutlined, CheckOutlined } from '@ant-design/icons';
-import type { TranslationEntry, Language } from '../types';
+import {
+  PlusOutlined,
+  CheckOutlined,
+  CloseOutlined,
+} from '@ant-design/icons';
+import type { TranslationEntry, Language, TranslationStatus } from '../types';
 import { translationsApi, languagesApi } from '../services/api';
+import { useI18n } from '../i18n/I18nProvider';
 
 const { Title } = Typography;
 const { TextArea } = Input;
-const { Option } = Select;
 
 export default function TranslationWorkbench() {
+  const { t } = useI18n();
   const [translations, setTranslations] = useState<TranslationEntry[]>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
   const [namespaces, setNamespaces] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedLang, setSelectedLang] = useState<string>('en-US');
+  const [selectedLang, setSelectedLang] = useState<string>('');
   const [selectedNamespace, setSelectedNamespace] = useState<string>('');
-  const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState<TranslationStatus | 'all'>('all');
   const [searchText, setSearchText] = useState<string>('');
   const [editingKey, setEditingKey] = useState<string>('');
   const [editValue, setEditValue] = useState<string>('');
   const [modalOpen, setModalOpen] = useState(false);
   const [form] = Form.useForm();
   const [defaultLang, setDefaultLang] = useState<string>('zh-CN');
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -46,15 +53,15 @@ export default function TranslationWorkbench() {
         params.status = filterStatus;
       }
       if (searchText) params.search = searchText;
-
       const data = await translationsApi.getAll(params);
       setTranslations(data);
+      setSelectedRowKeys([]);
     } catch (error: any) {
-      message.error(error.message || '加载失败');
+      message.error(t('common.loadFailed'));
     } finally {
       setLoading(false);
     }
-  }, [selectedNamespace, selectedLang, filterStatus, searchText]);
+  }, [selectedNamespace, selectedLang, filterStatus, searchText, t]);
 
   useEffect(() => {
     const init = async () => {
@@ -68,23 +75,27 @@ export default function TranslationWorkbench() {
         setNamespaces(ns);
         const defLang = langs.find((l) => l.isDefault);
         if (defLang) setDefaultLang(defLang.code);
-        if (enabledLangs.length > 0 && !enabledLangs.find((l) => l.code === selectedLang)) {
-          setSelectedLang(enabledLangs[0].code);
-        }
+        const nonDefault = enabledLangs.find((l) => !l.isDefault);
+        const initial = nonDefault?.code || defLang?.code || 'en-US';
+        setSelectedLang(initial);
       } catch (error: any) {
-        message.error(error.message || '加载失败');
+        message.error(t('common.loadFailed'));
       }
     };
     init();
   }, []);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (selectedLang) {
+      fetchData();
+    }
+  }, [fetchData, selectedLang]);
 
-  const isTranslated = (entry: TranslationEntry) => {
-    const val = entry.translations[selectedLang];
-    return val && val.trim() !== '';
+  const getStatus = (entry: TranslationEntry, lang: string): TranslationStatus => {
+    const val = entry.translations[lang];
+    if (!val || val.trim() === '') return 'unfilled';
+    if (entry.completed && entry.completed[lang]) return 'completed';
+    return 'filled';
   };
 
   const handleEdit = (record: TranslationEntry) => {
@@ -95,11 +106,11 @@ export default function TranslationWorkbench() {
   const handleSave = async (record: TranslationEntry) => {
     try {
       await translationsApi.translate(record.key, selectedLang, editValue);
-      message.success('保存成功');
+      message.success(t('common.operationSuccess'));
       setEditingKey('');
       fetchData();
     } catch (error: any) {
-      message.error(error.message || '保存失败');
+      message.error(t('common.operationFailed'));
     }
   };
 
@@ -108,14 +119,28 @@ export default function TranslationWorkbench() {
     setEditValue('');
   };
 
-  const handleMarkComplete = async (record: TranslationEntry) => {
+  const handleToggleComplete = async (record: TranslationEntry, completed: boolean) => {
     try {
-      const value = record.translations[selectedLang] || record.translations[defaultLang] || '';
-      await translationsApi.translate(record.key, selectedLang, value);
-      message.success('已标记完成');
+      await translationsApi.complete(record.key, selectedLang, completed);
+      message.success(t('common.operationSuccess'));
       fetchData();
     } catch (error: any) {
-      message.error(error.message || '操作失败');
+      message.error(t('common.operationFailed'));
+    }
+  };
+
+  const handleBatchComplete = async (completed: boolean) => {
+    if (selectedRowKeys.length === 0) {
+      message.warning('请先选择条目');
+      return;
+    }
+    try {
+      await translationsApi.batchComplete(selectedRowKeys, selectedLang, completed);
+      message.success(t('common.operationSuccess'));
+      setSelectedRowKeys([]);
+      fetchData();
+    } catch (error: any) {
+      message.error(t('common.operationFailed'));
     }
   };
 
@@ -135,46 +160,44 @@ export default function TranslationWorkbench() {
           [selectedLang]: values.translation || '',
         },
       });
-      message.success('添加成功');
+      message.success(t('common.operationSuccess'));
       setModalOpen(false);
       fetchData();
     } catch (error: any) {
-      message.error(error.message || '添加失败');
+      message.error(t('common.operationFailed'));
     }
   };
 
-  const translatedCount = translations.filter((t) => isTranslated(t)).length;
-  const totalCount = translations.length;
+  const unfilledCount = translations.filter((e) => getStatus(e, selectedLang) === 'unfilled').length;
+  const filledCount = translations.filter((e) => getStatus(e, selectedLang) === 'filled').length;
+  const completedCount = translations.filter((e) => getStatus(e, selectedLang) === 'completed').length;
 
   const columns = [
     {
-      title: '键名',
+      title: t('translation.key'),
       dataIndex: 'key',
       key: 'key',
-      width: 250,
+      width: 240,
       render: (key: string) => <code>{key}</code>,
     },
     {
-      title: '命名空间',
+      title: t('translation.namespace'),
       dataIndex: 'namespace',
       key: 'namespace',
-      width: 120,
+      width: 110,
       render: (ns: string) => <Tag color="blue">{ns}</Tag>,
     },
     {
-      title: '描述',
+      title: t('translation.description'),
       dataIndex: 'description',
       key: 'description',
-      width: 150,
+      width: 140,
       ellipsis: true,
     },
     {
-      title: () => {
-        const langName = languages.find((l) => l.code === defaultLang)?.nativeName || defaultLang;
-        return `默认语言 (${langName})`;
-      },
+      title: `${t('translation.defaultLang')}`,
       key: 'default',
-      width: 200,
+      width: 180,
       ellipsis: true,
       render: (_: any, record: TranslationEntry) => (
         <Tooltip title={record.translations[defaultLang]}>
@@ -187,17 +210,15 @@ export default function TranslationWorkbench() {
         const langName = languages.find((l) => l.code === selectedLang)?.nativeName || selectedLang;
         return (
           <Space>
-            目标语言 ({langName})
-            {totalCount > 0 && (
-              <Tag color={translatedCount === totalCount ? 'green' : 'orange'}>
-                {translatedCount}/{totalCount}
-              </Tag>
-            )}
+            {t('translation.targetLang')} ({langName})
+            <Tag color="green">{completedCount}</Tag>
+            <Tag color="orange">{filledCount}</Tag>
+            <Tag color="red">{unfilledCount}</Tag>
           </Space>
         );
       },
       key: 'translation',
-      width: 300,
+      width: 280,
       render: (_: any, record: TranslationEntry) => {
         const isEditing = editingKey === record.key;
         if (isEditing) {
@@ -211,25 +232,26 @@ export default function TranslationWorkbench() {
               />
               <Space>
                 <Button size="small" type="primary" onClick={() => handleSave(record)}>
-                  保存
+                  {t('translation.save')}
                 </Button>
                 <Button size="small" onClick={handleCancel}>
-                  取消
+                  {t('translation.cancel')}
                 </Button>
               </Space>
             </Space>
           );
         }
-        const translated = isTranslated(record);
+        const status = getStatus(record, selectedLang);
+        const val = record.translations[selectedLang];
         return (
           <div onClick={() => handleEdit(record)} style={{ cursor: 'pointer' }}>
-            {translated ? (
-              <Tooltip title="点击编辑">
-                <span>{record.translations[selectedLang]}</span>
+            {status === 'unfilled' ? (
+              <Tooltip title={t('translation.clickToTranslate')}>
+                <span style={{ color: '#ff4d4f', fontStyle: 'italic' }}>{t('translation.unfilled')}</span>
               </Tooltip>
             ) : (
-              <Tooltip title="点击翻译">
-                <span style={{ color: '#faad14', fontStyle: 'italic' }}>未翻译</span>
+              <Tooltip title={t('translation.clickToEdit')}>
+                <span>{val}</span>
               </Tooltip>
             )}
           </div>
@@ -237,37 +259,54 @@ export default function TranslationWorkbench() {
       },
     },
     {
-      title: '状态',
+      title: t('language.status'),
       key: 'status',
-      width: 100,
-      render: (_: any, record: TranslationEntry) =>
-        isTranslated(record) ? (
-          <Tag color="green">已翻译</Tag>
-        ) : (
-          <Tag color="orange">待翻译</Tag>
-        ),
+      width: 120,
+      render: (_: any, record: TranslationEntry) => {
+        const status = getStatus(record, selectedLang);
+        if (status === 'completed') {
+          return <Tag color="green">{t('translation.completed')}</Tag>;
+        }
+        if (status === 'filled') {
+          return <Tag color="orange">{t('translation.filled')}</Tag>;
+        }
+        return <Tag color="red">{t('translation.unfilled')}</Tag>;
+      },
     },
     {
-      title: '操作',
+      title: t('language.actions'),
       key: 'actions',
-      width: 150,
-      render: (_: any, record: TranslationEntry) => (
-        <Space size="small">
-          <Button type="link" size="small" onClick={() => handleEdit(record)}>
-            编辑
-          </Button>
-          {!isTranslated(record) && (
-            <Button
-              type="link"
-              size="small"
-              icon={<CheckOutlined />}
-              onClick={() => handleMarkComplete(record)}
-            >
-              标记完成
+      width: 180,
+      render: (_: any, record: TranslationEntry) => {
+        const status = getStatus(record, selectedLang);
+        return (
+          <Space size="small">
+            <Button type="link" size="small" onClick={() => handleEdit(record)}>
+              {t('translation.edit')}
             </Button>
-          )}
-        </Space>
-      ),
+            {status === 'filled' && (
+              <Button
+                type="link"
+                size="small"
+                icon={<CheckOutlined />}
+                onClick={() => handleToggleComplete(record, true)}
+              >
+                {t('translation.markComplete')}
+              </Button>
+            )}
+            {status === 'completed' && (
+              <Popconfirm
+                title={t('translation.batchMarkIncomplete')}
+                onConfirm={() => handleToggleComplete(record, false)}
+              >
+                <Button type="link" size="small" icon={<CloseOutlined />} danger>
+                  {t('translation.filled')}
+                </Button>
+              </Popconfirm>
+            )}
+          </Space>
+        );
+      },
     },
   ];
 
@@ -275,24 +314,24 @@ export default function TranslationWorkbench() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
         <Title level={4} style={{ margin: 0 }}>
-          翻译工作台
+          {t('translation.workbench')}
         </Title>
         <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-          添加翻译条目
+          {t('translation.addTarget')}
         </Button>
       </div>
 
       <div style={{ marginBottom: 16, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <Select
-          value={selectedLang}
+          value={selectedLang || undefined}
           onChange={setSelectedLang}
           style={{ width: 180 }}
-          placeholder="选择目标语言"
+          placeholder={t('translation.selectLang')}
         >
           {languages.map((l) => (
-            <Option key={l.code} value={l.code}>
+            <Select.Option key={l.code} value={l.code}>
               {l.nativeName} ({l.code})
-            </Option>
+            </Select.Option>
           ))}
         </Select>
 
@@ -300,29 +339,35 @@ export default function TranslationWorkbench() {
           value={selectedNamespace || undefined}
           onChange={(v) => setSelectedNamespace(v || '')}
           style={{ width: 150 }}
-          placeholder="命名空间"
+          placeholder={t('translation.namespace')}
           allowClear
         >
           {namespaces.map((ns) => (
-            <Option key={ns} value={ns}>
+            <Select.Option key={ns} value={ns}>
               {ns}
-            </Option>
+            </Select.Option>
           ))}
         </Select>
 
         <Select
           value={filterStatus}
-          onChange={setFilterStatus}
-          style={{ width: 150 }}
-          prefix={<FilterOutlined />}
+          onChange={(v) => setFilterStatus(v as TranslationStatus | 'all')}
+          style={{ width: 180 }}
         >
-          <Option value="all">全部</Option>
-          <Option value="translated">已翻译</Option>
-          <Option value="untranslated">待翻译</Option>
+          <Select.Option value="all">All</Select.Option>
+          <Select.Option value="unfilled">
+            <span style={{ color: '#ff4d4f' }}>{t('translation.unfilled')}</span> ({unfilledCount})
+          </Select.Option>
+          <Select.Option value="filled">
+            <span style={{ color: '#faad14' }}>{t('translation.filled')}</span> ({filledCount})
+          </Select.Option>
+          <Select.Option value="completed">
+            <span style={{ color: '#52c41a' }}>{t('translation.completed')}</span> ({completedCount})
+          </Select.Option>
         </Select>
 
         <Input.Search
-          placeholder="搜索键名或内容"
+          placeholder={t('translation.searchPlaceholder')}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onSearch={(v) => setSearchText(v)}
@@ -331,23 +376,55 @@ export default function TranslationWorkbench() {
         />
       </div>
 
+      {selectedRowKeys.length > 0 && (
+        <div style={{ marginBottom: 16, padding: '8px 16px', background: '#f6f6f6', borderRadius: 6, display: 'flex', alignItems: 'center', gap: 12 }}>
+          <span>已选择 {selectedRowKeys.length} 项</span>
+          <Button
+            size="small"
+            type="primary"
+            icon={<CheckOutlined />}
+            onClick={() => handleBatchComplete(true)}
+          >
+            {t('translation.batchMarkComplete')}
+          </Button>
+          <Popconfirm
+            title={t('translation.batchMarkIncomplete')}
+            onConfirm={() => handleBatchComplete(false)}
+          >
+            <Button size="small" icon={<CloseOutlined />} danger>
+              {t('translation.batchMarkIncomplete')}
+            </Button>
+          </Popconfirm>
+          <Button size="small" onClick={() => setSelectedRowKeys([])}>
+            {t('translation.cancel')}
+          </Button>
+        </div>
+      )}
+
       <Table
         columns={columns}
         dataSource={translations}
         rowKey="key"
         loading={loading}
+        rowSelection={{
+          selectedRowKeys,
+          onChange: (keys) => setSelectedRowKeys(keys as string[]),
+          getCheckboxProps: (record) => ({
+            disabled: getStatus(record, selectedLang) === 'unfilled',
+          }),
+        }}
         pagination={{
           pageSize: 20,
           showSizeChanger: true,
-          showTotal: (total) => `共 ${total} 条`,
+          showTotal: (total) => t('common.total', { count: total }),
         }}
         locale={{
-          emptyText: <Empty description="暂无翻译条目" />,
+          emptyText: <Empty description={t('common.noData')} />,
         }}
       />
 
       <Modal
-        title="添加翻译条目"
+        title={t('translation.addTitle')}
         open={modalOpen}
         onOk={handleAddSubmit}
         onCancel={() => setModalOpen(false)}
@@ -356,22 +433,22 @@ export default function TranslationWorkbench() {
         <Form form={form} layout="vertical">
           <Form.Item
             name="key"
-            label="翻译键名"
-            rules={[{ required: true, message: '请输入翻译键名' }]}
+            label={t('translation.keyName')}
+            rules={[{ required: true, message: t('translation.keyName') }]}
           >
-            <Input placeholder="例如：greeting.morning" />
+            <Input placeholder="greeting.morning" />
           </Form.Item>
           <Form.Item
             name="namespace"
-            label="命名空间"
+            label={t('translation.namespace')}
             initialValue="common"
           >
-            <Input placeholder="例如：common" />
+            <Input placeholder="common" />
           </Form.Item>
-          <Form.Item name="description" label="描述">
-            <Input placeholder="可选，描述此翻译的用途" />
+          <Form.Item name="description" label={t('translation.description')}>
+            <Input />
           </Form.Item>
-          <Form.Item name="translation" label={`翻译内容 (${selectedLang})`}>
+          <Form.Item name="translation" label={`${t('translation.targetLang')} (${selectedLang})`}>
             <TextArea autoSize={{ minRows: 2, maxRows: 4 }} />
           </Form.Item>
         </Form>

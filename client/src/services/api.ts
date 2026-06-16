@@ -3,7 +3,9 @@ import type {
   Language,
   TranslationEntry,
   LocaleBundleResponse,
+  LocaleDiffResponse,
   ImportResult,
+  TranslationStatus,
 } from '../types';
 
 const API_BASE = '/api';
@@ -46,7 +48,7 @@ export const translationsApi = {
   getAll: (params?: {
     namespace?: string;
     lang?: string;
-    status?: 'translated' | 'untranslated';
+    status?: TranslationStatus;
     search?: string;
   }) => {
     const query = new URLSearchParams();
@@ -74,6 +76,16 @@ export const translationsApi = {
       method: 'PATCH',
       body: JSON.stringify({ lang, value }),
     }),
+  complete: (key: string, lang: string, completed: boolean) =>
+    request<TranslationEntry>(`/translations/${key}/complete`, {
+      method: 'PATCH',
+      body: JSON.stringify({ lang, completed }),
+    }),
+  batchComplete: (keys: string[], lang: string, completed: boolean) =>
+    request<{ success: boolean; updatedCount: number }>('/translations/batch-complete', {
+      method: 'POST',
+      body: JSON.stringify({ keys, lang, completed }),
+    }),
   remove: (key: string) =>
     request<{ success: boolean }>(`/translations/${key}`, { method: 'DELETE' }),
 };
@@ -86,9 +98,7 @@ export const localeApi = {
     return request<LocaleBundleResponse>(`/locale/${lang}?${query.toString()}`);
   },
   getDiff: (lang: string) =>
-    request<{ lang: string; baseLang: string; diff: Record<string, string> }>(
-      `/locale/${lang}/diff`
-    ),
+    request<LocaleDiffResponse>(`/locale/${lang}/diff`),
 };
 
 export const ioApi = {

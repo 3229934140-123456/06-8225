@@ -14,10 +14,11 @@ import {
   message,
   Typography,
 } from 'antd';
-import { PlusOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import type { LanguageWithProgress } from '../types';
 import { languagesApi } from '../services/api';
 import ImportExportModal from '../components/ImportExportModal';
+import { useI18n } from '../i18n/I18nProvider';
 
 const { Title } = Typography;
 
@@ -29,6 +30,7 @@ interface FormValues {
 }
 
 export default function LanguagesPage() {
+  const { t } = useI18n();
   const [languages, setLanguages] = useState<LanguageWithProgress[]>([]);
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -43,7 +45,7 @@ export default function LanguagesPage() {
       const data = await languagesApi.getAll();
       setLanguages(data);
     } catch (error: any) {
-      message.error(error.message || '加载失败');
+      message.error(t('common.loadFailed'));
     } finally {
       setLoading(false);
     }
@@ -76,45 +78,45 @@ export default function LanguagesPage() {
       const values = await form.validateFields();
       if (editingLang) {
         await languagesApi.update(editingLang.code, values);
-        message.success('更新成功');
+        message.success(t('common.operationSuccess'));
       } else {
         await languagesApi.create(values);
-        message.success('创建成功');
+        message.success(t('common.operationSuccess'));
       }
       setModalOpen(false);
       fetchLanguages();
     } catch (error: any) {
-      message.error(error.message || '操作失败');
+      message.error(t('common.operationFailed'));
     }
   };
 
   const handleToggle = async (lang: LanguageWithProgress, enabled: boolean) => {
     try {
       await languagesApi.update(lang.code, { isEnabled: enabled });
-      message.success(enabled ? '已启用' : '已禁用');
+      message.success(t('common.operationSuccess'));
       fetchLanguages();
     } catch (error: any) {
-      message.error(error.message || '操作失败');
+      message.error(t('common.operationFailed'));
     }
   };
 
   const handleDelete = async (lang: LanguageWithProgress) => {
     try {
       await languagesApi.remove(lang.code);
-      message.success('删除成功');
+      message.success(t('common.operationSuccess'));
       fetchLanguages();
     } catch (error: any) {
-      message.error(error.message || '删除失败');
+      message.error(t('common.operationFailed'));
     }
   };
 
   const handleSetDefault = async (lang: LanguageWithProgress) => {
     try {
       await languagesApi.update(lang.code, { isDefault: true });
-      message.success('已设为默认语言');
+      message.success(t('common.operationSuccess'));
       fetchLanguages();
     } catch (error: any) {
-      message.error(error.message || '操作失败');
+      message.error(t('common.operationFailed'));
     }
   };
 
@@ -125,77 +127,95 @@ export default function LanguagesPage() {
 
   const columns = [
     {
-      title: '语言编码',
+      title: t('language.code'),
       dataIndex: 'code',
       key: 'code',
       width: 120,
       render: (code: string) => <code>{code}</code>,
     },
     {
-      title: '英文名称',
+      title: t('language.name'),
       dataIndex: 'name',
       key: 'name',
-      width: 150,
+      width: 140,
     },
     {
-      title: '原生名称',
+      title: t('language.nativeName'),
       dataIndex: 'nativeName',
       key: 'nativeName',
-      width: 150,
+      width: 140,
     },
     {
-      title: '翻译进度',
+      title: t('language.progress'),
       key: 'progress',
-      width: 250,
+      width: 300,
       render: (_: any, record: LanguageWithProgress) => {
         const { progress } = record;
-        const status =
+        const translatedStatus =
           progress.percentage === 100
             ? 'success'
             : progress.percentage >= 50
             ? 'active'
             : 'exception';
+        const completedStatus =
+          progress.completedPercentage === 100
+            ? 'success'
+            : progress.completedPercentage >= 50
+            ? 'active'
+            : 'exception';
         return (
-          <Tooltip title={`${progress.translated} / ${progress.total} 条已翻译`}>
-            <Progress
-              percent={progress.percentage}
-              status={status as any}
-              size="small"
-            />
-          </Tooltip>
+          <div>
+            <Tooltip title={`${t('translation.filled')}: ${progress.translated} / ${progress.total}`}>
+              <Progress
+                percent={progress.percentage}
+                status={translatedStatus as any}
+                size="small"
+                format={(p) => `${t('translation.filled')} ${p}%`}
+              />
+            </Tooltip>
+            <Tooltip title={`${t('translation.completed')}: ${progress.completed} / ${progress.total}`}>
+              <Progress
+                percent={progress.completedPercentage}
+                status={completedStatus as any}
+                size="small"
+                strokeColor="#52c41a"
+                format={(p) => `${t('translation.completed')} ${p}%`}
+              />
+            </Tooltip>
+          </div>
         );
       },
     },
     {
-      title: '状态',
+      title: t('language.status'),
       key: 'status',
-      width: 100,
+      width: 110,
       render: (_: any, record: LanguageWithProgress) => (
         <Space>
-          {record.isDefault && <Tag color="gold">默认</Tag>}
+          {record.isDefault && <Tag color="gold">{t('language.default')}</Tag>}
           {record.isEnabled ? (
-            <Tag color="green">已启用</Tag>
+            <Tag color="green">{t('language.enabled')}</Tag>
           ) : (
-            <Tag color="default">已禁用</Tag>
+            <Tag color="default">{t('language.disabled')}</Tag>
           )}
         </Space>
       ),
     },
     {
-      title: '操作',
+      title: t('language.actions'),
       key: 'actions',
       width: 320,
       render: (_: any, record: LanguageWithProgress) => (
         <Space size="small">
           <Button type="link" size="small" onClick={() => handleEdit(record)}>
-            编辑
+            {t('language.edit')}
           </Button>
           <Button
             type="link"
             size="small"
             onClick={() => handleImportExport(record)}
           >
-            导入/导出
+            {t('language.importExport')}
           </Button>
           {!record.isDefault && (
             <Button
@@ -203,7 +223,7 @@ export default function LanguagesPage() {
               size="small"
               onClick={() => handleSetDefault(record)}
             >
-              设为默认
+              {t('language.setDefault')}
             </Button>
           )}
           <Switch
@@ -213,12 +233,11 @@ export default function LanguagesPage() {
           />
           {!record.isDefault && (
             <Popconfirm
-              title="确定删除此语言？"
-              description="删除后该语言的翻译数据将保留，但语言配置将被移除。"
+              title={t('common.confirm')}
               onConfirm={() => handleDelete(record)}
             >
               <Button type="link" size="small" danger>
-                删除
+                {t('language.delete')}
               </Button>
             </Popconfirm>
           )}
@@ -231,10 +250,10 @@ export default function LanguagesPage() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
         <Title level={4} style={{ margin: 0 }}>
-          语言管理
+          {t('language.management')}
         </Title>
         <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>
-          添加语言
+          {t('language.add')}
         </Button>
       </div>
 
@@ -246,7 +265,7 @@ export default function LanguagesPage() {
       />
 
       <Modal
-        title={editingLang ? '编辑语言' : '添加语言'}
+        title={editingLang ? t('language.editTitle') : t('language.addTitle')}
         open={modalOpen}
         onOk={handleSubmit}
         onCancel={() => setModalOpen(false)}
@@ -255,29 +274,29 @@ export default function LanguagesPage() {
         <Form form={form} layout="vertical">
           <Form.Item
             name="code"
-            label="语言编码"
+            label={t('language.code')}
             rules={[
-              { required: true, message: '请输入语言编码' },
-              { pattern: /^[a-z]{2}-[A-Z]{2}$/, message: '格式如：zh-CN, en-US' },
+              { required: true, message: t('language.code') },
+              { pattern: /^[a-z]{2}-[A-Z]{2}$/, message: 'zh-CN, en-US' },
             ]}
           >
-            <Input placeholder="例如：zh-CN" disabled={!!editingLang} />
+            <Input placeholder="zh-CN" disabled={!!editingLang} />
           </Form.Item>
           <Form.Item
             name="name"
-            label="英文名称"
-            rules={[{ required: true, message: '请输入英文名称' }]}
+            label={t('language.name')}
+            rules={[{ required: true, message: t('language.name') }]}
           >
-            <Input placeholder="例如：Chinese" />
+            <Input placeholder="Chinese" />
           </Form.Item>
           <Form.Item
             name="nativeName"
-            label="原生名称"
-            rules={[{ required: true, message: '请输入原生名称' }]}
+            label={t('language.nativeName')}
+            rules={[{ required: true, message: t('language.nativeName') }]}
           >
-            <Input placeholder="例如：简体中文" />
+            <Input placeholder="简体中文" />
           </Form.Item>
-          <Form.Item name="isDefault" label="设为默认语言" valuePropName="checked">
+          <Form.Item name="isDefault" label={t('language.setDefault')} valuePropName="checked">
             <Switch />
           </Form.Item>
         </Form>

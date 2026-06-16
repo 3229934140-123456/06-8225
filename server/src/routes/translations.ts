@@ -1,8 +1,15 @@
 import { Router } from 'express';
 import { readTranslations, writeTranslations } from '../store.js';
-import type { TranslationEntry } from '../types';
+import type { TranslationEntry, TranslationStatus } from '../types';
 
 const router = Router();
+
+function getStatus(entry: TranslationEntry, langCode: string): TranslationStatus {
+  const val = entry.translations[langCode];
+  if (!val || val.trim() === '') return 'unfilled';
+  if (entry.completed[langCode]) return 'completed';
+  return 'filled';
+}
 
 router.get('/', (req, res) => {
   const { namespace, lang, status, search } = req.query;
@@ -26,15 +33,8 @@ router.get('/', (req, res) => {
 
   if (lang && status) {
     const langCode = String(lang);
-    if (status === 'translated') {
-      translations = translations.filter(
-        (t) => t.translations[langCode] && t.translations[langCode].trim() !== ''
-      );
-    } else if (status === 'untranslated') {
-      translations = translations.filter(
-        (t) => !t.translations[langCode] || t.translations[langCode].trim() === ''
-      );
-    }
+    const statusVal = String(status) as TranslationStatus;
+    translations = translations.filter((t) => getStatus(t, langCode) === statusVal);
   }
 
   res.json(translations);
@@ -59,7 +59,7 @@ router.get('/:key', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { key, namespace, description, translations: trans } = req.body;
+  const { key, namespace, description, translations: trans, completed: comp } = req.body;
 
   if (!key || !namespace) {
     return res.status(400).json({ error: 'key and namespace are required' });
@@ -76,6 +76,7 @@ router.post('/', (req, res) => {
     namespace,
     description: description || '',
     translations: trans || {},
+    completed: comp || {},
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
@@ -88,7 +89,7 @@ router.post('/', (req, res) => {
 
 router.put('/:key', (req, res) => {
   const { key } = req.params;
-  const { namespace, description, translations: trans } = req.body;
+  const { namespace, description, translations: trans, completed: comp } = req.body;
 
   const translations = readTranslations();
   const entryIndex = translations.findIndex((t) => t.key === key);
@@ -103,6 +104,12 @@ router.put('/:key', (req, res) => {
     translations[entryIndex].translations = {
       ...translations[entryIndex].translations,
       ...trans,
+    };
+  }
+  if (comp !== undefined) {
+    translations[entryIndex].completed = {
+      ...translations[entryIndex].completed,
+      ...comp,
     };
   }
   translations[entryIndex].updatedAt = new Date().toISOString();
@@ -133,6 +140,58 @@ router.patch('/:key/translate', (req, res) => {
   writeTranslations(translations);
 
   res.json(translations[entryIndex]);
+});
+
+router.patch('/:key/complete', (req, res) => {
+  const { key } = req.params;
+  const { lang, completed } = req.body;
+
+  if (!lang) {
+    return res.status(400).json({ error: 'lang is required' });
+  }
+
+  const translations = readTranslations();
+  const entryIndex = translations.findIndex((t) => t.key === key);
+
+  if (entryIndex === -1) {
+    return res.status(404).json({ error: 'Translation key not found' });
+  }
+
+  if (!translations[entryIndex].completed) {
+    translations[entryIndex].completed = {};
+  }
+  translations[entryIndex].completed[lang] = completed !== false;
+  translations[entryIndex].updatedAt = new Date().toISOString();
+
+  writeTranslations(translations);
+
+  res.json(translations[entryIndex]);
+});
+
+router.post('/batch-complete', (req, res) => {
+  const { keys, lang, completed } = req.body;
+
+  if (!keys || !Array.isArray(keys) || !lang) {
+    return res.status(400).json({ error: 'keys (array) and lang are required' });
+  }
+
+  const translations = readTranslations();
+  const completedVal = completed !== false;
+
+  for (const key of keys) {
+    const entryIndex = translations.findIndex((t) => t.key === key);
+    if (entryIndex !== -1) {
+      if (!translations[entryIndex].completed) {
+        translations[entryIndex].completed = {};
+      }
+      translations[entryIndex].completed[lang] = completedVal;
+      translations[entryIndex].updatedAt = new Date().toISOString();
+    }
+  }
+
+  writeTranslations(translations);
+
+  res.json({ success: true, updatedCount: keys.length });
 });
 
 router.delete('/:key', (req, res) => {

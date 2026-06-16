@@ -8,14 +8,3 @@ body {
 * {
   box-sizing: border-box;
 }
-
-.fallback-text {
-  color: #999;
-  font-style: italic;
-}
-
-.fallback-text::after {
-  content: ' (fallback)';
-  font-size: 0.8em;
-  color: #ccc;
-}

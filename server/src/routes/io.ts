@@ -111,6 +111,7 @@ router.post('/import/:lang', upload.single('file'), (req, res) => {
           namespace: 'imported',
           description: '',
           translations: { [lang]: value },
+          completed: { [lang]: true },
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         };

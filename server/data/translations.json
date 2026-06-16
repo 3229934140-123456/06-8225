@@ -9,7 +9,12 @@
       "ja-JP": ""
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T22:06:42.588Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
   },
   {
     "key": "home",
@@ -21,7 +26,12 @@
       "ja-JP": "ホーム"
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
   },
   {
     "key": "settings",
@@ -33,7 +43,12 @@
       "ja-JP": ""
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T22:06:42.588Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
   },
   {
     "key": "save",
@@ -45,7 +60,12 @@
       "ja-JP": "保存"
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
   },
   {
     "key": "cancel",
@@ -57,7 +77,12 @@
       "ja-JP": "キャンセル"
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
   },
   {
     "key": "title",
@@ -69,7 +94,12 @@
       "ja-JP": "ダッシュボード"
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
   },
   {
     "key": "totalUsers",
@@ -81,7 +111,12 @@
       "ja-JP": ""
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": ""
+    }
   },
   {
     "key": "greeting.morning",
@@ -93,7 +128,12 @@
       "ja-JP": "おはようございます"
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
   },
   {
     "key": "greeting.afternoon",
@@ -105,7 +145,12 @@
       "ja-JP": ""
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": ""
+    }
   },
   {
     "key": "greeting.evening",
@@ -117,6 +162,1422 @@
       "ja-JP": "こんばんは"
     },
     "createdAt": "2026-06-16T21:51:15.711Z",
-    "updatedAt": "2026-06-16T21:51:15.711Z"
+    "updatedAt": "2026-06-16T21:51:15.711Z",
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    }
+  },
+  {
+    "key": "app.title",
+    "namespace": "ui",
+    "description": "系统标题",
+    "translations": {
+      "zh-CN": "多语言内容管理系统",
+      "en-US": "i18n Content Management System",
+      "ja-JP": "多言語コンテンツ管理システム"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.management",
+    "namespace": "ui",
+    "description": "语言管理菜单",
+    "translations": {
+      "zh-CN": "语言管理",
+      "en-US": "Language Management",
+      "ja-JP": "言語管理"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.switch",
+    "namespace": "ui",
+    "description": "语言切换标签",
+    "translations": {
+      "zh-CN": "语言切换",
+      "en-US": "Switch Language",
+      "ja-JP": "言語切替"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.add",
+    "namespace": "ui",
+    "description": "添加语言按钮",
+    "translations": {
+      "zh-CN": "添加语言",
+      "en-US": "Add Language",
+      "ja-JP": "言語追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.code",
+    "namespace": "ui",
+    "description": "语言编码字段",
+    "translations": {
+      "zh-CN": "语言编码",
+      "en-US": "Language Code",
+      "ja-JP": "言語コード"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.name",
+    "namespace": "ui",
+    "description": "英文名称字段",
+    "translations": {
+      "zh-CN": "英文名称",
+      "en-US": "English Name",
+      "ja-JP": "英語名"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.nativeName",
+    "namespace": "ui",
+    "description": "原生名称字段",
+    "translations": {
+      "zh-CN": "原生名称",
+      "en-US": "Native Name",
+      "ja-JP": "ネイティブ名"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.setDefault",
+    "namespace": "ui",
+    "description": "设为默认语言",
+    "translations": {
+      "zh-CN": "设为默认语言",
+      "en-US": "Set as Default",
+      "ja-JP": "デフォルトに設定"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.isDefault",
+    "namespace": "ui",
+    "description": "默认语言字段",
+    "translations": {
+      "zh-CN": "默认语言",
+      "en-US": "Default Language",
+      "ja-JP": "デフォルト言語"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.enabled",
+    "namespace": "ui",
+    "description": "已启用状态",
+    "translations": {
+      "zh-CN": "已启用",
+      "en-US": "Enabled",
+      "ja-JP": "有効"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.disabled",
+    "namespace": "ui",
+    "description": "已禁用状态",
+    "translations": {
+      "zh-CN": "已禁用",
+      "en-US": "Disabled",
+      "ja-JP": "無効"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.default",
+    "namespace": "ui",
+    "description": "默认标签",
+    "translations": {
+      "zh-CN": "默认",
+      "en-US": "Default",
+      "ja-JP": "デフォルト"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.progress",
+    "namespace": "ui",
+    "description": "翻译进度",
+    "translations": {
+      "zh-CN": "翻译进度",
+      "en-US": "Translation Progress",
+      "ja-JP": "翻訳進捗"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.status",
+    "namespace": "ui",
+    "description": "状态列",
+    "translations": {
+      "zh-CN": "状态",
+      "en-US": "Status",
+      "ja-JP": "ステータス"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.actions",
+    "namespace": "ui",
+    "description": "操作列",
+    "translations": {
+      "zh-CN": "操作",
+      "en-US": "Actions",
+      "ja-JP": "操作"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.edit",
+    "namespace": "ui",
+    "description": "编辑按钮",
+    "translations": {
+      "zh-CN": "编辑",
+      "en-US": "Edit",
+      "ja-JP": "編集"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.delete",
+    "namespace": "ui",
+    "description": "删除按钮",
+    "translations": {
+      "zh-CN": "删除",
+      "en-US": "Delete",
+      "ja-JP": "削除"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.importExport",
+    "namespace": "ui",
+    "description": "导入导出按钮",
+    "translations": {
+      "zh-CN": "导入/导出",
+      "en-US": "Import/Export",
+      "ja-JP": "インポート/エクスポート"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.editTitle",
+    "namespace": "ui",
+    "description": "编辑语言弹窗标题",
+    "translations": {
+      "zh-CN": "编辑语言",
+      "en-US": "Edit Language",
+      "ja-JP": "言語編集"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.389Z"
+  },
+  {
+    "key": "language.addTitle",
+    "namespace": "ui",
+    "description": "添加语言弹窗标题",
+    "translations": {
+      "zh-CN": "添加语言",
+      "en-US": "Add Language",
+      "ja-JP": "言語追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.389Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.workbench",
+    "namespace": "ui",
+    "description": "翻译工作台菜单",
+    "translations": {
+      "zh-CN": "翻译工作台",
+      "en-US": "Translation Workbench",
+      "ja-JP": "翻訳ワークベンチ"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.addTarget",
+    "namespace": "ui",
+    "description": "添加翻译条目按钮",
+    "translations": {
+      "zh-CN": "添加翻译条目",
+      "en-US": "Add Entry",
+      "ja-JP": "エントリ追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.targetLang",
+    "namespace": "ui",
+    "description": "目标语言",
+    "translations": {
+      "zh-CN": "目标语言",
+      "en-US": "Target Language",
+      "ja-JP": "対象言語"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.defaultLang",
+    "namespace": "ui",
+    "description": "默认语言列标题",
+    "translations": {
+      "zh-CN": "默认语言",
+      "en-US": "Default Language",
+      "ja-JP": "デフォルト言語"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.key",
+    "namespace": "ui",
+    "description": "键名列",
+    "translations": {
+      "zh-CN": "键名",
+      "en-US": "Key",
+      "ja-JP": "キー"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.namespace",
+    "namespace": "ui",
+    "description": "命名空间",
+    "translations": {
+      "zh-CN": "命名空间",
+      "en-US": "Namespace",
+      "ja-JP": "名前空間"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.description",
+    "namespace": "ui",
+    "description": "描述列",
+    "translations": {
+      "zh-CN": "描述",
+      "en-US": "Description",
+      "ja-JP": "説明"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.unfilled",
+    "namespace": "ui",
+    "description": "未填写状态",
+    "translations": {
+      "zh-CN": "未填写",
+      "en-US": "Unfilled",
+      "ja-JP": "未入力"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.filled",
+    "namespace": "ui",
+    "description": "已填写状态",
+    "translations": {
+      "zh-CN": "已填写",
+      "en-US": "Filled",
+      "ja-JP": "入力済"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.completed",
+    "namespace": "ui",
+    "description": "已完成状态",
+    "translations": {
+      "zh-CN": "已完成",
+      "en-US": "Completed",
+      "ja-JP": "完了"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.untranslated",
+    "namespace": "ui",
+    "description": "未翻译",
+    "translations": {
+      "zh-CN": "未翻译",
+      "en-US": "Not Translated",
+      "ja-JP": "未翻訳"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.save",
+    "namespace": "ui",
+    "description": "保存按钮",
+    "translations": {
+      "zh-CN": "保存",
+      "en-US": "Save",
+      "ja-JP": "保存"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.cancel",
+    "namespace": "ui",
+    "description": "取消按钮",
+    "translations": {
+      "zh-CN": "取消",
+      "en-US": "Cancel",
+      "ja-JP": "キャンセル"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.edit",
+    "namespace": "ui",
+    "description": "编辑按钮",
+    "translations": {
+      "zh-CN": "编辑",
+      "en-US": "Edit",
+      "ja-JP": "編集"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.markComplete",
+    "namespace": "ui",
+    "description": "标记完成按钮",
+    "translations": {
+      "zh-CN": "标记完成",
+      "en-US": "Mark Complete",
+      "ja-JP": "完了にする"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.batchMarkComplete",
+    "namespace": "ui",
+    "description": "批量标记完成按钮",
+    "translations": {
+      "zh-CN": "批量标记完成",
+      "en-US": "Batch Mark Complete",
+      "ja-JP": "一括完了"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.batchMarkIncomplete",
+    "namespace": "ui",
+    "description": "批量标记未完成",
+    "translations": {
+      "zh-CN": "批量标记未完成",
+      "en-US": "Batch Mark Incomplete",
+      "ja-JP": "一括未完了"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.searchPlaceholder",
+    "namespace": "ui",
+    "description": "搜索框占位",
+    "translations": {
+      "zh-CN": "搜索键名或内容",
+      "en-US": "Search key or content",
+      "ja-JP": "キーまたは内容を検索"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.selectLang",
+    "namespace": "ui",
+    "description": "选择目标语言占位",
+    "translations": {
+      "zh-CN": "选择目标语言",
+      "en-US": "Select Target Language",
+      "ja-JP": "対象言語を選択"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.clickToEdit",
+    "namespace": "ui",
+    "description": "点击编辑提示",
+    "translations": {
+      "zh-CN": "点击编辑",
+      "en-US": "Click to edit",
+      "ja-JP": "クリックして編集"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.clickToTranslate",
+    "namespace": "ui",
+    "description": "点击翻译提示",
+    "translations": {
+      "zh-CN": "点击翻译",
+      "en-US": "Click to translate",
+      "ja-JP": "クリックして翻訳"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.addTitle",
+    "namespace": "ui",
+    "description": "添加翻译条目弹窗标题",
+    "translations": {
+      "zh-CN": "添加翻译条目",
+      "en-US": "Add Translation Entry",
+      "ja-JP": "翻訳エントリ追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.keyName",
+    "namespace": "ui",
+    "description": "翻译键名字段",
+    "translations": {
+      "zh-CN": "翻译键名",
+      "en-US": "Translation Key",
+      "ja-JP": "翻訳キー"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.page",
+    "namespace": "ui",
+    "description": "演示页面菜单",
+    "translations": {
+      "zh-CN": "演示页面",
+      "en-US": "Demo Page",
+      "ja-JP": "デモページ"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.featureInfo",
+    "namespace": "ui",
+    "description": "功能说明标题",
+    "translations": {
+      "zh-CN": "功能说明",
+      "en-US": "Feature Info",
+      "ja-JP": "機能説明"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.featureDesc1",
+    "namespace": "ui",
+    "description": "功能说明条目1",
+    "translations": {
+      "zh-CN": "根据浏览器语言或手动切换加载对应语言包",
+      "en-US": "Load locale bundle based on browser language or manual switch",
+      "ja-JP": "ブラウザ言語または手動切替に基づいて言語パックをロード"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.featureDesc2",
+    "namespace": "ui",
+    "description": "功能说明条目2",
+    "translations": {
+      "zh-CN": "翻译缺失时自动回退到默认语言",
+      "en-US": "Auto fallback to default language when translation is missing",
+      "ja-JP": "翻訳がない場合デフォルト言語にフォールバック"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.featureDesc3",
+    "namespace": "ui",
+    "description": "功能说明条目3",
+    "translations": {
+      "zh-CN": "支持动态合并基础语言包和差异语言包",
+      "en-US": "Support dynamic merge of base and diff language packs",
+      "ja-JP": "基本言語パックと差分言語パックの動的マージをサポート"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.langSwitch",
+    "namespace": "ui",
+    "description": "语言切换卡片标题",
+    "translations": {
+      "zh-CN": "语言切换",
+      "en-US": "Language Switch",
+      "ja-JP": "言語切替"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.currentLang",
+    "namespace": "ui",
+    "description": "当前语言标签",
+    "translations": {
+      "zh-CN": "当前语言",
+      "en-US": "Current Language",
+      "ja-JP": "現在の言語"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.defaultLang",
+    "namespace": "ui",
+    "description": "默认语言标签",
+    "translations": {
+      "zh-CN": "默认语言",
+      "en-US": "Default Language",
+      "ja-JP": "デフォルト言語"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.translationDisplay",
+    "namespace": "ui",
+    "description": "翻译展示卡片标题",
+    "translations": {
+      "zh-CN": "翻译展示（含来源标识）",
+      "en-US": "Translation Display (with Source)",
+      "ja-JP": "翻訳表示（ソース付き）"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.translationResult",
+    "namespace": "ui",
+    "description": "翻译结果标签",
+    "translations": {
+      "zh-CN": "翻译结果",
+      "en-US": "Translation",
+      "ja-JP": "翻訳結果"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.fromDiff",
+    "namespace": "ui",
+    "description": "来自差异包",
+    "translations": {
+      "zh-CN": "差异包",
+      "en-US": "Diff Pack",
+      "ja-JP": "差分パック"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.fromFallback",
+    "namespace": "ui",
+    "description": "来自回退",
+    "translations": {
+      "zh-CN": "回退默认语言",
+      "en-US": "Fallback",
+      "ja-JP": "フォールバック"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.translated",
+    "namespace": "ui",
+    "description": "已翻译标签",
+    "translations": {
+      "zh-CN": "已翻译",
+      "en-US": "Translated",
+      "ja-JP": "翻訳済"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.paramExample",
+    "namespace": "ui",
+    "description": "带参数翻译示例标题",
+    "translations": {
+      "zh-CN": "带参数的翻译示例",
+      "en-US": "Translation with Parameters",
+      "ja-JP": "パラメータ付き翻訳例"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.noParam",
+    "namespace": "ui",
+    "description": "无参数示例",
+    "translations": {
+      "zh-CN": "无参数示例",
+      "en-US": "Without Params",
+      "ja-JP": "パラメータなし"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "demo.withParam",
+    "namespace": "ui",
+    "description": "带参数示例",
+    "translations": {
+      "zh-CN": "带参数示例",
+      "en-US": "With Params",
+      "ja-JP": "パラメータ付き"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.save",
+    "namespace": "ui",
+    "description": "保存按钮",
+    "translations": {
+      "zh-CN": "保存",
+      "en-US": "Save",
+      "ja-JP": "保存"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.cancel",
+    "namespace": "ui",
+    "description": "取消按钮",
+    "translations": {
+      "zh-CN": "取消",
+      "en-US": "Cancel",
+      "ja-JP": "キャンセル"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.add",
+    "namespace": "ui",
+    "description": "添加按钮",
+    "translations": {
+      "zh-CN": "添加",
+      "en-US": "Add",
+      "ja-JP": "追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.delete",
+    "namespace": "ui",
+    "description": "删除按钮",
+    "translations": {
+      "zh-CN": "删除",
+      "en-US": "Delete",
+      "ja-JP": "削除"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.edit",
+    "namespace": "ui",
+    "description": "编辑按钮",
+    "translations": {
+      "zh-CN": "编辑",
+      "en-US": "Edit",
+      "ja-JP": "編集"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.confirm",
+    "namespace": "ui",
+    "description": "确认",
+    "translations": {
+      "zh-CN": "确定",
+      "en-US": "Confirm",
+      "ja-JP": "確認"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.operationSuccess",
+    "namespace": "ui",
+    "description": "操作成功",
+    "translations": {
+      "zh-CN": "操作成功",
+      "en-US": "Operation Successful",
+      "ja-JP": "操作成功"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.operationFailed",
+    "namespace": "ui",
+    "description": "操作失败",
+    "translations": {
+      "zh-CN": "操作失败",
+      "en-US": "Operation Failed",
+      "ja-JP": "操作失敗"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.loadFailed",
+    "namespace": "ui",
+    "description": "加载失败",
+    "translations": {
+      "zh-CN": "加载失败",
+      "en-US": "Load Failed",
+      "ja-JP": "読み込み失敗"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.total",
+    "namespace": "ui",
+    "description": "共N条",
+    "translations": {
+      "zh-CN": "共 {count} 条",
+      "en-US": "{count} items in total",
+      "ja-JP": "全 {count} 件"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "common.noData",
+    "namespace": "ui",
+    "description": "暂无数据",
+    "translations": {
+      "zh-CN": "暂无数据",
+      "en-US": "No Data",
+      "ja-JP": "データなし"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.exportTitle",
+    "namespace": "ui",
+    "description": "导出标签",
+    "translations": {
+      "zh-CN": "导出",
+      "en-US": "Export",
+      "ja-JP": "エクスポート"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.importTitle",
+    "namespace": "ui",
+    "description": "导入标签",
+    "translations": {
+      "zh-CN": "导入",
+      "en-US": "Import",
+      "ja-JP": "インポート"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.exportFormat",
+    "namespace": "ui",
+    "description": "导出格式",
+    "translations": {
+      "zh-CN": "导出格式",
+      "en-US": "Export Format",
+      "ja-JP": "エクスポート形式"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.nested",
+    "namespace": "ui",
+    "description": "嵌套结构",
+    "translations": {
+      "zh-CN": "嵌套结构",
+      "en-US": "Nested",
+      "ja-JP": "ネスト構造"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.flat",
+    "namespace": "ui",
+    "description": "扁平结构",
+    "translations": {
+      "zh-CN": "扁平结构",
+      "en-US": "Flat",
+      "ja-JP": "フラット構造"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.importMode",
+    "namespace": "ui",
+    "description": "导入模式",
+    "translations": {
+      "zh-CN": "导入模式",
+      "en-US": "Import Mode",
+      "ja-JP": "インポートモード"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.merge",
+    "namespace": "ui",
+    "description": "合并模式",
+    "translations": {
+      "zh-CN": "合并模式（保留现有翻译）",
+      "en-US": "Merge (keep existing)",
+      "ja-JP": "マージ（既存を保持）"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.overwrite",
+    "namespace": "ui",
+    "description": "覆盖模式",
+    "translations": {
+      "zh-CN": "覆盖模式（替换全部翻译）",
+      "en-US": "Overwrite (replace all)",
+      "ja-JP": "上書き（全置換）"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.selectFile",
+    "namespace": "ui",
+    "description": "选择文件",
+    "translations": {
+      "zh-CN": "选择 JSON 文件",
+      "en-US": "Select JSON File",
+      "ja-JP": "JSONファイルを選択"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.startImport",
+    "namespace": "ui",
+    "description": "开始导入",
+    "translations": {
+      "zh-CN": "开始导入",
+      "en-US": "Start Import",
+      "ja-JP": "インポート開始"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "io.title",
+    "namespace": "ui",
+    "description": "导入导出弹窗标题",
+    "translations": {
+      "zh-CN": "导入/导出",
+      "en-US": "Import / Export",
+      "ja-JP": "インポート/エクスポート"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "dashboard.title",
+    "namespace": "dashboard",
+    "description": "仪表盘标题",
+    "translations": {
+      "zh-CN": "仪表盘",
+      "en-US": "Dashboard",
+      "ja-JP": "ダッシュボード"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "dashboard.totalUsers",
+    "namespace": "dashboard",
+    "description": "用户总数",
+    "translations": {
+      "zh-CN": "用户总数",
+      "en-US": "Total Users",
+      "ja-JP": ""
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:00:34.390Z",
+    "updatedAt": "2026-06-16T22:00:34.390Z"
   }
 ]

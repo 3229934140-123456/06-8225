@@ -1,3 +1,5 @@
+export type TranslationStatus = 'unfilled' | 'filled' | 'completed';
+
 export interface Language {
   code: string;
   name: string;
@@ -10,7 +12,9 @@ export interface Language {
 export interface TranslationProgress {
   total: number;
   translated: number;
+  completed: number;
   percentage: number;
+  completedPercentage: number;
 }
 
 export interface LanguageWithProgress extends Language {
@@ -22,6 +26,7 @@ export interface TranslationEntry {
   namespace: string;
   description?: string;
   translations: Record<string, string>;
+  completed: Record<string, boolean>;
   createdAt: string;
   updatedAt: string;
 }
@@ -36,9 +41,17 @@ export interface LocaleBundleResponse {
   bundle: LocaleBundle;
 }
 
+export interface LocaleDiffResponse {
+  lang: string;
+  baseLang: string;
+  diff: Record<string, string>;
+}
+
 export interface ImportResult {
   added: number;
   updated: number;
   skipped: number;
   errors: string[];
 }
+
+export type KeySource = 'diff' | 'fallback' | 'default';

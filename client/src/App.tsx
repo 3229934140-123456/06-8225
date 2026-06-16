@@ -21,17 +21,17 @@ function App() {
     {
       key: '/languages',
       icon: <GlobalOutlined />,
-      label: <Link to="/languages">{t('language.management') || '语言管理'}</Link>,
+      label: <Link to="/languages">{t('language.management')}</Link>,
     },
     {
       key: '/translations',
       icon: <TranslationOutlined />,
-      label: <Link to="/translations">{t('translation.workbench') || '翻译工作台'}</Link>,
+      label: <Link to="/translations">{t('translation.workbench')}</Link>,
     },
     {
       key: '/demo',
       icon: <ExperimentOutlined />,
-      label: <Link to="/demo">{t('demo.page') || '演示页面'}</Link>,
+      label: <Link to="/demo">{t('demo.page')}</Link>,
     },
   ];
 
@@ -47,10 +47,10 @@ function App() {
         }}
       >
         <Title level={4} style={{ color: 'white', margin: 0, flex: 1 }}>
-          {t('app.title') || '多语言内容管理系统'}
+          {t('app.title')}
         </Title>
         <Space>
-          <span style={{ color: 'white' }}>{t('language.switch') || '语言切换'}:</span>
+          <span style={{ color: 'white' }}>{t('language.switch')}:</span>
           <Select
             value={locale}
             onChange={setLocale}
