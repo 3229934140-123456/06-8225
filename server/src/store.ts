@@ -1,7 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import type { Language, TranslationEntry } from './types';
+import type {
+  Language,
+  TranslationEntry,
+  ContentType,
+  Content,
+  LocaleBundleVersion,
+} from './types';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,6 +15,9 @@ const DATA_DIR = path.resolve(__dirname, '../data');
 
 const LANGUAGES_FILE = path.join(DATA_DIR, 'languages.json');
 const TRANSLATIONS_FILE = path.join(DATA_DIR, 'translations.json');
+const CONTENT_TYPES_FILE = path.join(DATA_DIR, 'content-types.json');
+const CONTENTS_FILE = path.join(DATA_DIR, 'contents.json');
+const VERSIONS_FILE = path.join(DATA_DIR, 'locale-versions.json');
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
@@ -92,6 +101,9 @@ function getDefaultTranslations(): TranslationEntry[] {
     e('translation.clickToTranslate', 'ui', '点击翻译提示', '点击翻译', 'Click to translate', 'クリックして翻訳', true, true, false),
     e('translation.addTitle', 'ui', '添加翻译条目弹窗标题', '添加翻译条目', 'Add Translation Entry', '翻訳エントリ追加', true, true, false),
     e('translation.keyName', 'ui', '翻译键名字段', '翻译键名', 'Translation Key', '翻訳キー', true, true, false),
+    e('translation.filterAll', 'ui', '筛选全部', '全部', 'All', 'すべて', true, true, true),
+    e('translation.selectedCount', 'ui', '已选择N项', '已选择 {count} 项', '{count} items selected', '{count} 件選択中', true, true, false),
+    e('translation.pleaseSelect', 'ui', '请先选择条目提示', '请先选择条目', 'Please select items first', '先に項目を選択してください', true, true, false),
 
     e('demo.page', 'ui', '演示页面菜单', '演示页面', 'Demo Page', 'デモページ', true, true, false),
     e('demo.featureInfo', 'ui', '功能说明标题', '功能说明', 'Feature Info', '機能説明', true, true, false),
@@ -121,6 +133,13 @@ function getDefaultTranslations(): TranslationEntry[] {
     e('common.loadFailed', 'ui', '加载失败', '加载失败', 'Load Failed', '読み込み失敗', true, true, false),
     e('common.total', 'ui', '共N条', '共 {count} 条', '{count} items in total', '全 {count} 件', true, true, false),
     e('common.noData', 'ui', '暂无数据', '暂无数据', 'No Data', 'データなし', true, true, false),
+    e('common.back', 'ui', '返回按钮', '返回', 'Back', '戻る', true, true, false),
+    e('common.view', 'ui', '查看按钮', '查看', 'View', '表示', true, true, false),
+    e('common.publish', 'ui', '发布按钮', '发布', 'Publish', '公開', true, true, false),
+    e('common.review', 'ui', '送审按钮', '送审', 'Submit for Review', 'レビュー提出', true, true, false),
+    e('common.draft', 'ui', '草稿按钮', '保存草稿', 'Save Draft', '下書き保存', true, true, false),
+    e('common.preview', 'ui', '预览按钮', '预览', 'Preview', 'プレビュー', true, true, false),
+    e('common.ok', 'ui', '确定按钮', '确定', 'OK', 'OK', true, true, true),
 
     e('io.exportTitle', 'ui', '导出标签', '导出', 'Export', 'エクスポート', true, true, false),
     e('io.importTitle', 'ui', '导入标签', '导入', 'Import', 'インポート', true, true, false),
@@ -133,6 +152,56 @@ function getDefaultTranslations(): TranslationEntry[] {
     e('io.selectFile', 'ui', '选择文件', '选择 JSON 文件', 'Select JSON File', 'JSONファイルを選択', true, true, false),
     e('io.startImport', 'ui', '开始导入', '开始导入', 'Start Import', 'インポート開始', true, true, false),
     e('io.title', 'ui', '导入导出弹窗标题', '导入/导出', 'Import / Export', 'インポート/エクスポート', true, true, false),
+
+    e('contentType.management', 'ui', '内容类型菜单', '内容类型', 'Content Types', 'コンテンツタイプ', true, true, false),
+    e('contentType.name', 'ui', '类型名称', '类型名称', 'Type Name', 'タイプ名', true, true, false),
+    e('contentType.description', 'ui', '类型描述', '类型描述', 'Description', '説明', true, true, false),
+    e('contentType.fields', 'ui', '字段配置', '字段配置', 'Fields', 'フィールド設定', true, true, false),
+    e('contentType.fieldKey', 'ui', '字段键名', '字段键名', 'Field Key', 'フィールドキー', true, true, false),
+    e('contentType.fieldLabel', 'ui', '字段标签', '字段标签', 'Field Label', 'フィールドラベル', true, true, false),
+    e('contentType.fieldType', 'ui', '字段类型', '字段类型', 'Field Type', 'フィールドタイプ', true, true, false),
+    e('contentType.translatable', 'ui', '可翻译', '可翻译', 'Translatable', '翻訳可能', true, true, false),
+    e('contentType.required', 'ui', '必填', '必填', 'Required', '必須', true, true, false),
+    e('contentType.addTitle', 'ui', '添加内容类型标题', '添加内容类型', 'Add Content Type', 'コンテンツタイプ追加', true, true, false),
+    e('contentType.editTitle', 'ui', '编辑内容类型标题', '编辑内容类型', 'Edit Content Type', 'コンテンツタイプ編集', true, true, false),
+    e('contentType.addField', 'ui', '添加字段', '添加字段', 'Add Field', 'フィールド追加', true, true, false),
+    e('contentType.fieldTypeText', 'ui', '字段类型-普通文本', '普通文本', 'Plain Text', '通常テキスト', true, true, false),
+    e('contentType.fieldTypeRichText', 'ui', '字段类型-富文本', '富文本', 'Rich Text', 'リッチテキスト', true, true, false),
+    e('contentType.fieldTypeImage', 'ui', '字段类型-图片', '图片', 'Image', '画像', true, true, false),
+    e('contentType.fieldTypeDate', 'ui', '字段类型-日期', '日期', 'Date', '日付', true, true, false),
+    e('contentType.fieldTypeNumber', 'ui', '字段类型-数字', '数字', 'Number', '数値', true, true, false),
+
+    e('content.management', 'ui', '内容管理菜单', '内容管理', 'Contents', 'コンテンツ管理', true, true, false),
+    e('content.title', 'ui', '内容标题', '内容标题', 'Content Title', 'コンテンツタイトル', true, true, false),
+    e('content.type', 'ui', '内容类型', '内容类型', 'Content Type', 'コンテンツタイプ', true, true, false),
+    e('content.addTitle', 'ui', '添加内容标题', '添加内容', 'Add Content', 'コンテンツ追加', true, true, false),
+    e('content.editTitle', 'ui', '编辑内容标题', '编辑内容', 'Edit Content', 'コンテンツ編集', true, true, false),
+    e('content.previewTitle', 'ui', '预览内容标题', '预览内容', 'Preview Content', 'コンテンツプレビュー', true, true, false),
+    e('content.statusDraft', 'ui', '草稿状态', '草稿', 'Draft', '下書き', true, true, true),
+    e('content.statusReview', 'ui', '待审核状态', '待审核', 'Pending Review', 'レビュー待ち', true, true, false),
+    e('content.statusPublished', 'ui', '已发布状态', '已发布', 'Published', '公開済', true, true, false),
+    e('content.languageProgress', 'ui', '各语言填写进度', '各语言填写进度', 'Language Fill Progress', '各言語入力進捗', true, true, false),
+    e('content.missingFields', 'ui', '缺失字段提示', '缺失字段', 'Missing Fields', '不足フィールド', true, true, false),
+    e('content.filled', 'ui', '已填写', '已填写', 'Filled', '入力済', true, true, false),
+    e('content.publishWarning', 'ui', '发布前缺失语言警告', '以下语言仍有缺失字段，是否确认发布？', 'The following languages still have missing fields. Confirm publish?', '以下の言語に不足フィールドがあります。公開を確認しますか？', true, true, false),
+    e('content.previewLang', 'ui', '预览语言', '预览语言', 'Preview Language', 'プレビュー言語', true, true, false),
+
+    e('version.management', 'ui', '语言包版本菜单', '语言包版本', 'Bundle Versions', '言語パックバージョン', true, true, false),
+    e('version.version', 'ui', '版本号', '版本号', 'Version', 'バージョン', true, true, false),
+    e('version.lang', 'ui', '所属语言', '所属语言', 'Language', '対象言語', true, true, false),
+    e('version.description', 'ui', '版本描述', '版本描述', 'Description', 'バージョン説明', true, true, false),
+    e('version.changes', 'ui', '变更记录', '变更记录', 'Changes', '変更履歴', true, true, false),
+    e('version.publish', 'ui', '发布版本', '发布版本', 'Publish Version', 'バージョン公開', true, true, false),
+    e('version.rollback', 'ui', '回滚到此版本', '回滚到此版本', 'Rollback to This Version', 'このバージョンにロールバック', true, true, false),
+    e('version.current', 'ui', '当前生效', '当前生效', 'Current', '現在有効', true, true, false),
+    e('version.createdAt', 'ui', '创建时间', '创建时间', 'Created At', '作成日時', true, true, false),
+    e('version.createdBy', 'ui', '创建人', '创建人', 'Created By', '作成者', true, true, false),
+    e('version.publishedAt', 'ui', '发布时间', '发布时间', 'Published At', '公開日時', true, true, false),
+    e('version.createSnapshot', 'ui', '创建快照按钮', '创建快照', 'Create Snapshot', 'スナップショット作成', true, true, false),
+    e('version.changeAdded', 'ui', '新增变更', '新增', 'Added', '追加', true, true, false),
+    e('version.changeModified', 'ui', '修改变更', '修改', 'Modified', '変更', true, true, false),
+    e('version.changeRemoved', 'ui', '删除变更', '删除', 'Removed', '削除', true, true, false),
+    e('version.createTitle', 'ui', '创建版本标题', '创建新版本', 'Create New Version', '新バージョン作成', true, true, false),
 
     e('welcome', 'common', '欢迎语', '欢迎使用多语言内容管理系统', 'Welcome to the i18n CMS', '', true, true, false),
     e('home', 'common', '首页', '首页', 'Home', 'ホーム', true, true, true),
@@ -153,6 +222,61 @@ function getDefaultLanguages(): Language[] {
   ];
 }
 
+function getDefaultContentTypes(): ContentType[] {
+  return [
+    {
+      id: 'article',
+      name: '文章',
+      description: '普通文章内容',
+      fields: [
+        { key: 'title', label: '标题', type: 'text', translatable: true, required: true },
+        { key: 'summary', label: '摘要', type: 'text', translatable: true, required: false },
+        { key: 'body', label: '正文', type: 'richtext', translatable: true, required: true },
+        { key: 'cover', label: '封面图', type: 'image', translatable: false, required: false },
+        { key: 'publishedDate', label: '发布日期', type: 'date', translatable: false, required: false },
+      ],
+      createdAt: now(),
+      updatedAt: now(),
+    },
+    {
+      id: 'activity',
+      name: '活动页',
+      description: '营销活动落地页',
+      fields: [
+        { key: 'title', label: '活动标题', type: 'text', translatable: true, required: true },
+        { key: 'subtitle', label: '副标题', type: 'text', translatable: true, required: false },
+        { key: 'description', label: '活动详情', type: 'richtext', translatable: true, required: true },
+        { key: 'banner', label: '横幅图', type: 'image', translatable: true, required: false },
+        { key: 'startDate', label: '活动开始时间', type: 'date', translatable: false, required: true },
+        { key: 'endDate', label: '活动结束时间', type: 'date', translatable: false, required: true },
+        { key: 'maxParticipants', label: '参与人数上限', type: 'number', translatable: false, required: false },
+      ],
+      createdAt: now(),
+      updatedAt: now(),
+    },
+  ];
+}
+
+function getDefaultContents(): Content[] {
+  return [
+    {
+      id: 'c1',
+      typeId: 'article',
+      status: 'draft',
+      author: 'admin',
+      fields: {
+        title: { 'zh-CN': '欢迎来到多语言CMS', 'en-US': 'Welcome to i18n CMS', 'ja-JP': '' },
+        summary: { 'zh-CN': '这是一篇示例文章', 'en-US': 'This is a sample article', 'ja-JP': '' },
+        body: { 'zh-CN': '<p>这是文章正文内容</p>', 'en-US': '<p>This is article body</p>', 'ja-JP': '' },
+        cover: { 'zh-CN': '', 'en-US': '', 'ja-JP': '' },
+        publishedDate: { 'zh-CN': '2026-06-17', 'en-US': '2026-06-17', 'ja-JP': '2026-06-17' },
+      },
+      createdAt: now(),
+      updatedAt: now(),
+    },
+  ];
+}
+
 function initializeData() {
   ensureDataDir();
 
@@ -164,6 +288,18 @@ function initializeData() {
     fs.writeFileSync(TRANSLATIONS_FILE, JSON.stringify(getDefaultTranslations(), null, 2));
   } else {
     migrateTranslations();
+  }
+
+  if (!fs.existsSync(CONTENT_TYPES_FILE)) {
+    fs.writeFileSync(CONTENT_TYPES_FILE, JSON.stringify(getDefaultContentTypes(), null, 2));
+  }
+
+  if (!fs.existsSync(CONTENTS_FILE)) {
+    fs.writeFileSync(CONTENTS_FILE, JSON.stringify(getDefaultContents(), null, 2));
+  }
+
+  if (!fs.existsSync(VERSIONS_FILE)) {
+    fs.writeFileSync(VERSIONS_FILE, JSON.stringify([], null, 2));
   }
 }
 
@@ -184,17 +320,11 @@ function migrateTranslations() {
     }
 
     const defaultEntries = getDefaultTranslations();
-    const existingKeys = new Set(entries.map((e) => e.key));
+    const existingKeys = new Set(entries.map((ent) => ent.key));
 
     for (const defaultEntry of defaultEntries) {
       if (!existingKeys.has(defaultEntry.key)) {
-        const newEntry = { ...defaultEntry, createdAt: now(), updatedAt: now() };
-        for (const lang of Object.keys(newEntry.translations)) {
-          if (!newEntry.completed[lang]) {
-            newEntry.completed[lang] = false;
-          }
-        }
-        entries.push(newEntry);
+        entries.push({ ...defaultEntry, createdAt: now(), updatedAt: now() });
         changed = true;
       }
     }
@@ -227,6 +357,39 @@ export function readTranslations(): TranslationEntry[] {
 export function writeTranslations(translations: TranslationEntry[]): void {
   ensureDataDir();
   fs.writeFileSync(TRANSLATIONS_FILE, JSON.stringify(translations, null, 2));
+}
+
+export function readContentTypes(): ContentType[] {
+  initializeData();
+  const data = fs.readFileSync(CONTENT_TYPES_FILE, 'utf-8');
+  return JSON.parse(data);
+}
+
+export function writeContentTypes(types: ContentType[]): void {
+  ensureDataDir();
+  fs.writeFileSync(CONTENT_TYPES_FILE, JSON.stringify(types, null, 2));
+}
+
+export function readContents(): Content[] {
+  initializeData();
+  const data = fs.readFileSync(CONTENTS_FILE, 'utf-8');
+  return JSON.parse(data);
+}
+
+export function writeContents(contents: Content[]): void {
+  ensureDataDir();
+  fs.writeFileSync(CONTENTS_FILE, JSON.stringify(contents, null, 2));
+}
+
+export function readVersions(): LocaleBundleVersion[] {
+  initializeData();
+  const data = fs.readFileSync(VERSIONS_FILE, 'utf-8');
+  return JSON.parse(data);
+}
+
+export function writeVersions(versions: LocaleBundleVersion[]): void {
+  ensureDataDir();
+  fs.writeFileSync(VERSIONS_FILE, JSON.stringify(versions, null, 2));
 }
 
 initializeData();

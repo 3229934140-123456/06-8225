@@ -6,6 +6,10 @@ import type {
   LocaleDiffResponse,
   ImportResult,
   TranslationStatus,
+  ContentType,
+  Content,
+  ContentStatus,
+  LocaleBundleVersion,
 } from '../types';
 
 const API_BASE = '/api';
@@ -121,4 +125,62 @@ export const ioApi = {
       return res.json() as Promise<ImportResult>;
     });
   },
+};
+
+export const contentTypesApi = {
+  getAll: () => request<ContentType[]>('/content-types'),
+  get: (id: string) => request<ContentType>(`/content-types/${id}`),
+  create: (data: Partial<ContentType>) =>
+    request<ContentType>('/content-types', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  update: (id: string, data: Partial<ContentType>) =>
+    request<ContentType>(`/content-types/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+  remove: (id: string) =>
+    request<{ success: boolean }>(`/content-types/${id}`, { method: 'DELETE' }),
+};
+
+export const contentsApi = {
+  getAll: () => request<Content[]>('/contents'),
+  get: (id: string) => request<Content>(`/contents/${id}`),
+  create: (data: Partial<Content>) =>
+    request<Content>('/contents', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  update: (id: string, data: Partial<Content>) =>
+    request<Content>(`/contents/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+  setStatus: (id: string, status: ContentStatus) =>
+    request<Content>(`/contents/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+  getProgress: (id: string) =>
+    request<Content['languageProgress']>(`/contents/${id}/progress`),
+  remove: (id: string) =>
+    request<{ success: boolean }>(`/contents/${id}`, { method: 'DELETE' }),
+};
+
+export const versionsApi = {
+  getAll: (lang?: string) => {
+    const qs = lang ? `?lang=${encodeURIComponent(lang)}` : '';
+    return request<LocaleBundleVersion[]>(`/versions${qs}`);
+  },
+  get: (id: string) => request<LocaleBundleVersion>(`/versions/${id}`),
+  create: (data: { lang: string; description?: string }) =>
+    request<LocaleBundleVersion>('/versions', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  publish: (id: string) =>
+    request<LocaleBundleVersion>(`/versions/${id}/publish`, { method: 'POST' }),
+  rollback: (id: string) =>
+    request<LocaleBundleVersion>(`/versions/${id}/rollback`, { method: 'POST' }),
 };

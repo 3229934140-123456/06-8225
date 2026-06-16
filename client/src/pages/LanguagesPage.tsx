@@ -234,6 +234,8 @@ export default function LanguagesPage() {
           {!record.isDefault && (
             <Popconfirm
               title={t('common.confirm')}
+              okText={t('common.ok')}
+              cancelText={t('common.cancel')}
               onConfirm={() => handleDelete(record)}
             >
               <Button type="link" size="small" danger>
@@ -269,6 +271,8 @@ export default function LanguagesPage() {
         open={modalOpen}
         onOk={handleSubmit}
         onCancel={() => setModalOpen(false)}
+        okText={t('common.ok')}
+        cancelText={t('common.cancel')}
         destroyOnHidden
       >
         <Form form={form} layout="vertical">

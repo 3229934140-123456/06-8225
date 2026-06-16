@@ -1,0 +1,104 @@
+[
+  {
+    "id": "article",
+    "name": "文章",
+    "description": "普通文章内容",
+    "fields": [
+      {
+        "key": "title",
+        "label": "标题",
+        "type": "text",
+        "translatable": true,
+        "required": true
+      },
+      {
+        "key": "summary",
+        "label": "摘要",
+        "type": "text",
+        "translatable": true,
+        "required": false
+      },
+      {
+        "key": "body",
+        "label": "正文",
+        "type": "richtext",
+        "translatable": true,
+        "required": true
+      },
+      {
+        "key": "cover",
+        "label": "封面图",
+        "type": "image",
+        "translatable": false,
+        "required": false
+      },
+      {
+        "key": "publishedDate",
+        "label": "发布日期",
+        "type": "date",
+        "translatable": false,
+        "required": false
+      }
+    ],
+    "createdAt": "2026-06-16T22:17:31.938Z",
+    "updatedAt": "2026-06-16T22:17:31.938Z"
+  },
+  {
+    "id": "activity",
+    "name": "活动页",
+    "description": "营销活动落地页",
+    "fields": [
+      {
+        "key": "title",
+        "label": "活动标题",
+        "type": "text",
+        "translatable": true,
+        "required": true
+      },
+      {
+        "key": "subtitle",
+        "label": "副标题",
+        "type": "text",
+        "translatable": true,
+        "required": false
+      },
+      {
+        "key": "description",
+        "label": "活动详情",
+        "type": "richtext",
+        "translatable": true,
+        "required": true
+      },
+      {
+        "key": "banner",
+        "label": "横幅图",
+        "type": "image",
+        "translatable": true,
+        "required": false
+      },
+      {
+        "key": "startDate",
+        "label": "活动开始时间",
+        "type": "date",
+        "translatable": false,
+        "required": true
+      },
+      {
+        "key": "endDate",
+        "label": "活动结束时间",
+        "type": "date",
+        "translatable": false,
+        "required": true
+      },
+      {
+        "key": "maxParticipants",
+        "label": "参与人数上限",
+        "type": "number",
+        "translatable": false,
+        "required": false
+      }
+    ],
+    "createdAt": "2026-06-16T22:17:31.938Z",
+    "updatedAt": "2026-06-16T22:17:31.938Z"
+  }
+]

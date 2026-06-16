@@ -1,0 +1,37 @@
+[
+  {
+    "id": "c1",
+    "typeId": "article",
+    "status": "draft",
+    "author": "admin",
+    "fields": {
+      "title": {
+        "zh-CN": "欢迎来到多语言CMS",
+        "en-US": "Welcome to i18n CMS",
+        "ja-JP": ""
+      },
+      "summary": {
+        "zh-CN": "这是一篇示例文章",
+        "en-US": "This is a sample article",
+        "ja-JP": ""
+      },
+      "body": {
+        "zh-CN": "<p>这是文章正文内容</p>",
+        "en-US": "<p>This is article body</p>",
+        "ja-JP": ""
+      },
+      "cover": {
+        "zh-CN": "",
+        "en-US": "",
+        "ja-JP": ""
+      },
+      "publishedDate": {
+        "zh-CN": "2026-06-17",
+        "en-US": "2026-06-17",
+        "ja-JP": "2026-06-17"
+      }
+    },
+    "createdAt": "2026-06-16T22:17:31.939Z",
+    "updatedAt": "2026-06-16T22:17:31.939Z"
+  }
+]

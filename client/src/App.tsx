@@ -4,11 +4,19 @@ import {
   GlobalOutlined,
   TranslationOutlined,
   ExperimentOutlined,
+  DatabaseOutlined,
+  FileTextOutlined,
+  TagsOutlined,
+  HistoryOutlined,
 } from '@ant-design/icons';
 import { useI18n } from './i18n/I18nProvider';
 import LanguagesPage from './pages/LanguagesPage';
 import TranslationWorkbench from './pages/TranslationWorkbench';
 import DemoPage from './pages/DemoPage';
+import ContentTypesPage from './pages/ContentTypesPage';
+import ContentsPage from './pages/ContentsPage';
+import ContentEditPage from './pages/ContentEditPage';
+import VersionsPage from './pages/VersionsPage';
 
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
@@ -27,6 +35,21 @@ function App() {
       key: '/translations',
       icon: <TranslationOutlined />,
       label: <Link to="/translations">{t('translation.workbench')}</Link>,
+    },
+    {
+      key: '/content-types',
+      icon: <TagsOutlined />,
+      label: <Link to="/content-types">{t('contentType.management')}</Link>,
+    },
+    {
+      key: '/contents',
+      icon: <FileTextOutlined />,
+      label: <Link to="/contents">{t('content.management')}</Link>,
+    },
+    {
+      key: '/versions',
+      icon: <HistoryOutlined />,
+      label: <Link to="/versions">{t('version.management')}</Link>,
     },
     {
       key: '/demo',
@@ -68,7 +91,7 @@ function App() {
           <Menu
             theme="dark"
             mode="inline"
-            selectedKeys={[location.pathname]}
+            selectedKeys={location.pathname.startsWith('/contents') ? ['/contents'] : [location.pathname]}
             items={menuItems}
             style={{ height: '100%', borderRight: 0 }}
           />
@@ -87,6 +110,10 @@ function App() {
               <Route path="/" element={<LanguagesPage />} />
               <Route path="/languages" element={<LanguagesPage />} />
               <Route path="/translations" element={<TranslationWorkbench />} />
+              <Route path="/content-types" element={<ContentTypesPage />} />
+              <Route path="/contents" element={<ContentsPage />} />
+              <Route path="/contents/:id" element={<ContentEditPage />} />
+              <Route path="/versions" element={<VersionsPage />} />
               <Route path="/demo" element={<DemoPage />} />
             </Routes>
           </Content>

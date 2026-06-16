@@ -1579,5 +1579,974 @@
     },
     "createdAt": "2026-06-16T22:00:34.390Z",
     "updatedAt": "2026-06-16T22:00:34.390Z"
+  },
+  {
+    "key": "translation.filterAll",
+    "namespace": "ui",
+    "description": "筛选全部",
+    "translations": {
+      "zh-CN": "全部",
+      "en-US": "All",
+      "ja-JP": "すべて"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "translation.selectedCount",
+    "namespace": "ui",
+    "description": "已选择N项",
+    "translations": {
+      "zh-CN": "已选择 {count} 项",
+      "en-US": "{count} items selected",
+      "ja-JP": "{count} 件選択中"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "translation.pleaseSelect",
+    "namespace": "ui",
+    "description": "请先选择条目提示",
+    "translations": {
+      "zh-CN": "请先选择条目",
+      "en-US": "Please select items first",
+      "ja-JP": "先に項目を選択してください"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "common.back",
+    "namespace": "ui",
+    "description": "返回按钮",
+    "translations": {
+      "zh-CN": "返回",
+      "en-US": "Back",
+      "ja-JP": "戻る"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "common.view",
+    "namespace": "ui",
+    "description": "查看按钮",
+    "translations": {
+      "zh-CN": "查看",
+      "en-US": "View",
+      "ja-JP": "表示"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "common.publish",
+    "namespace": "ui",
+    "description": "发布按钮",
+    "translations": {
+      "zh-CN": "发布",
+      "en-US": "Publish",
+      "ja-JP": "公開"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "common.review",
+    "namespace": "ui",
+    "description": "送审按钮",
+    "translations": {
+      "zh-CN": "送审",
+      "en-US": "Submit for Review",
+      "ja-JP": "レビュー提出"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "common.draft",
+    "namespace": "ui",
+    "description": "草稿按钮",
+    "translations": {
+      "zh-CN": "保存草稿",
+      "en-US": "Save Draft",
+      "ja-JP": "下書き保存"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "common.preview",
+    "namespace": "ui",
+    "description": "预览按钮",
+    "translations": {
+      "zh-CN": "预览",
+      "en-US": "Preview",
+      "ja-JP": "プレビュー"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "common.ok",
+    "namespace": "ui",
+    "description": "确定按钮",
+    "translations": {
+      "zh-CN": "确定",
+      "en-US": "OK",
+      "ja-JP": "OK"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.management",
+    "namespace": "ui",
+    "description": "内容类型菜单",
+    "translations": {
+      "zh-CN": "内容类型",
+      "en-US": "Content Types",
+      "ja-JP": "コンテンツタイプ"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.name",
+    "namespace": "ui",
+    "description": "类型名称",
+    "translations": {
+      "zh-CN": "类型名称",
+      "en-US": "Type Name",
+      "ja-JP": "タイプ名"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.description",
+    "namespace": "ui",
+    "description": "类型描述",
+    "translations": {
+      "zh-CN": "类型描述",
+      "en-US": "Description",
+      "ja-JP": "説明"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fields",
+    "namespace": "ui",
+    "description": "字段配置",
+    "translations": {
+      "zh-CN": "字段配置",
+      "en-US": "Fields",
+      "ja-JP": "フィールド設定"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldKey",
+    "namespace": "ui",
+    "description": "字段键名",
+    "translations": {
+      "zh-CN": "字段键名",
+      "en-US": "Field Key",
+      "ja-JP": "フィールドキー"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldLabel",
+    "namespace": "ui",
+    "description": "字段标签",
+    "translations": {
+      "zh-CN": "字段标签",
+      "en-US": "Field Label",
+      "ja-JP": "フィールドラベル"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldType",
+    "namespace": "ui",
+    "description": "字段类型",
+    "translations": {
+      "zh-CN": "字段类型",
+      "en-US": "Field Type",
+      "ja-JP": "フィールドタイプ"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.translatable",
+    "namespace": "ui",
+    "description": "可翻译",
+    "translations": {
+      "zh-CN": "可翻译",
+      "en-US": "Translatable",
+      "ja-JP": "翻訳可能"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.required",
+    "namespace": "ui",
+    "description": "必填",
+    "translations": {
+      "zh-CN": "必填",
+      "en-US": "Required",
+      "ja-JP": "必須"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.addTitle",
+    "namespace": "ui",
+    "description": "添加内容类型标题",
+    "translations": {
+      "zh-CN": "添加内容类型",
+      "en-US": "Add Content Type",
+      "ja-JP": "コンテンツタイプ追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.editTitle",
+    "namespace": "ui",
+    "description": "编辑内容类型标题",
+    "translations": {
+      "zh-CN": "编辑内容类型",
+      "en-US": "Edit Content Type",
+      "ja-JP": "コンテンツタイプ編集"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.addField",
+    "namespace": "ui",
+    "description": "添加字段",
+    "translations": {
+      "zh-CN": "添加字段",
+      "en-US": "Add Field",
+      "ja-JP": "フィールド追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldTypeText",
+    "namespace": "ui",
+    "description": "字段类型-普通文本",
+    "translations": {
+      "zh-CN": "普通文本",
+      "en-US": "Plain Text",
+      "ja-JP": "通常テキスト"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldTypeRichText",
+    "namespace": "ui",
+    "description": "字段类型-富文本",
+    "translations": {
+      "zh-CN": "富文本",
+      "en-US": "Rich Text",
+      "ja-JP": "リッチテキスト"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldTypeImage",
+    "namespace": "ui",
+    "description": "字段类型-图片",
+    "translations": {
+      "zh-CN": "图片",
+      "en-US": "Image",
+      "ja-JP": "画像"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldTypeDate",
+    "namespace": "ui",
+    "description": "字段类型-日期",
+    "translations": {
+      "zh-CN": "日期",
+      "en-US": "Date",
+      "ja-JP": "日付"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "contentType.fieldTypeNumber",
+    "namespace": "ui",
+    "description": "字段类型-数字",
+    "translations": {
+      "zh-CN": "数字",
+      "en-US": "Number",
+      "ja-JP": "数値"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.management",
+    "namespace": "ui",
+    "description": "内容管理菜单",
+    "translations": {
+      "zh-CN": "内容管理",
+      "en-US": "Contents",
+      "ja-JP": "コンテンツ管理"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.title",
+    "namespace": "ui",
+    "description": "内容标题",
+    "translations": {
+      "zh-CN": "内容标题",
+      "en-US": "Content Title",
+      "ja-JP": "コンテンツタイトル"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.type",
+    "namespace": "ui",
+    "description": "内容类型",
+    "translations": {
+      "zh-CN": "内容类型",
+      "en-US": "Content Type",
+      "ja-JP": "コンテンツタイプ"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.addTitle",
+    "namespace": "ui",
+    "description": "添加内容标题",
+    "translations": {
+      "zh-CN": "添加内容",
+      "en-US": "Add Content",
+      "ja-JP": "コンテンツ追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.editTitle",
+    "namespace": "ui",
+    "description": "编辑内容标题",
+    "translations": {
+      "zh-CN": "编辑内容",
+      "en-US": "Edit Content",
+      "ja-JP": "コンテンツ編集"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.previewTitle",
+    "namespace": "ui",
+    "description": "预览内容标题",
+    "translations": {
+      "zh-CN": "预览内容",
+      "en-US": "Preview Content",
+      "ja-JP": "コンテンツプレビュー"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.statusDraft",
+    "namespace": "ui",
+    "description": "草稿状态",
+    "translations": {
+      "zh-CN": "草稿",
+      "en-US": "Draft",
+      "ja-JP": "下書き"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": true
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.statusReview",
+    "namespace": "ui",
+    "description": "待审核状态",
+    "translations": {
+      "zh-CN": "待审核",
+      "en-US": "Pending Review",
+      "ja-JP": "レビュー待ち"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.statusPublished",
+    "namespace": "ui",
+    "description": "已发布状态",
+    "translations": {
+      "zh-CN": "已发布",
+      "en-US": "Published",
+      "ja-JP": "公開済"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.languageProgress",
+    "namespace": "ui",
+    "description": "各语言填写进度",
+    "translations": {
+      "zh-CN": "各语言填写进度",
+      "en-US": "Language Fill Progress",
+      "ja-JP": "各言語入力進捗"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.missingFields",
+    "namespace": "ui",
+    "description": "缺失字段提示",
+    "translations": {
+      "zh-CN": "缺失字段",
+      "en-US": "Missing Fields",
+      "ja-JP": "不足フィールド"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.filled",
+    "namespace": "ui",
+    "description": "已填写",
+    "translations": {
+      "zh-CN": "已填写",
+      "en-US": "Filled",
+      "ja-JP": "入力済"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.publishWarning",
+    "namespace": "ui",
+    "description": "发布前缺失语言警告",
+    "translations": {
+      "zh-CN": "以下语言仍有缺失字段，是否确认发布？",
+      "en-US": "The following languages still have missing fields. Confirm publish?",
+      "ja-JP": "以下の言語に不足フィールドがあります。公開を確認しますか？"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "content.previewLang",
+    "namespace": "ui",
+    "description": "预览语言",
+    "translations": {
+      "zh-CN": "预览语言",
+      "en-US": "Preview Language",
+      "ja-JP": "プレビュー言語"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.management",
+    "namespace": "ui",
+    "description": "语言包版本菜单",
+    "translations": {
+      "zh-CN": "语言包版本",
+      "en-US": "Bundle Versions",
+      "ja-JP": "言語パックバージョン"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.version",
+    "namespace": "ui",
+    "description": "版本号",
+    "translations": {
+      "zh-CN": "版本号",
+      "en-US": "Version",
+      "ja-JP": "バージョン"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.lang",
+    "namespace": "ui",
+    "description": "所属语言",
+    "translations": {
+      "zh-CN": "所属语言",
+      "en-US": "Language",
+      "ja-JP": "対象言語"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.description",
+    "namespace": "ui",
+    "description": "版本描述",
+    "translations": {
+      "zh-CN": "版本描述",
+      "en-US": "Description",
+      "ja-JP": "バージョン説明"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.changes",
+    "namespace": "ui",
+    "description": "变更记录",
+    "translations": {
+      "zh-CN": "变更记录",
+      "en-US": "Changes",
+      "ja-JP": "変更履歴"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.publish",
+    "namespace": "ui",
+    "description": "发布版本",
+    "translations": {
+      "zh-CN": "发布版本",
+      "en-US": "Publish Version",
+      "ja-JP": "バージョン公開"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.rollback",
+    "namespace": "ui",
+    "description": "回滚到此版本",
+    "translations": {
+      "zh-CN": "回滚到此版本",
+      "en-US": "Rollback to This Version",
+      "ja-JP": "このバージョンにロールバック"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.current",
+    "namespace": "ui",
+    "description": "当前生效",
+    "translations": {
+      "zh-CN": "当前生效",
+      "en-US": "Current",
+      "ja-JP": "現在有効"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.createdAt",
+    "namespace": "ui",
+    "description": "创建时间",
+    "translations": {
+      "zh-CN": "创建时间",
+      "en-US": "Created At",
+      "ja-JP": "作成日時"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.createdBy",
+    "namespace": "ui",
+    "description": "创建人",
+    "translations": {
+      "zh-CN": "创建人",
+      "en-US": "Created By",
+      "ja-JP": "作成者"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.publishedAt",
+    "namespace": "ui",
+    "description": "发布时间",
+    "translations": {
+      "zh-CN": "发布时间",
+      "en-US": "Published At",
+      "ja-JP": "公開日時"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.createSnapshot",
+    "namespace": "ui",
+    "description": "创建快照按钮",
+    "translations": {
+      "zh-CN": "创建快照",
+      "en-US": "Create Snapshot",
+      "ja-JP": "スナップショット作成"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.changeAdded",
+    "namespace": "ui",
+    "description": "新增变更",
+    "translations": {
+      "zh-CN": "新增",
+      "en-US": "Added",
+      "ja-JP": "追加"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.changeModified",
+    "namespace": "ui",
+    "description": "修改变更",
+    "translations": {
+      "zh-CN": "修改",
+      "en-US": "Modified",
+      "ja-JP": "変更"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.changeRemoved",
+    "namespace": "ui",
+    "description": "删除变更",
+    "translations": {
+      "zh-CN": "删除",
+      "en-US": "Removed",
+      "ja-JP": "削除"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
+  },
+  {
+    "key": "version.createTitle",
+    "namespace": "ui",
+    "description": "创建版本标题",
+    "translations": {
+      "zh-CN": "创建新版本",
+      "en-US": "Create New Version",
+      "ja-JP": "新バージョン作成"
+    },
+    "completed": {
+      "zh-CN": true,
+      "en-US": true,
+      "ja-JP": false
+    },
+    "createdAt": "2026-06-16T22:17:31.937Z",
+    "updatedAt": "2026-06-16T22:17:31.937Z"
   }
 ]

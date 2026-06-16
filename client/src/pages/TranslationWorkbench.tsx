@@ -131,7 +131,7 @@ export default function TranslationWorkbench() {
 
   const handleBatchComplete = async (completed: boolean) => {
     if (selectedRowKeys.length === 0) {
-      message.warning('请先选择条目');
+      message.warning(t('translation.pleaseSelect'));
       return;
     }
     try {
@@ -297,6 +297,8 @@ export default function TranslationWorkbench() {
             {status === 'completed' && (
               <Popconfirm
                 title={t('translation.batchMarkIncomplete')}
+                okText={t('common.ok')}
+                cancelText={t('common.cancel')}
                 onConfirm={() => handleToggleComplete(record, false)}
               >
                 <Button type="link" size="small" icon={<CloseOutlined />} danger>
@@ -354,7 +356,7 @@ export default function TranslationWorkbench() {
           onChange={(v) => setFilterStatus(v as TranslationStatus | 'all')}
           style={{ width: 180 }}
         >
-          <Select.Option value="all">All</Select.Option>
+          <Select.Option value="all">{t('translation.filterAll')}</Select.Option>
           <Select.Option value="unfilled">
             <span style={{ color: '#ff4d4f' }}>{t('translation.unfilled')}</span> ({unfilledCount})
           </Select.Option>
@@ -378,7 +380,7 @@ export default function TranslationWorkbench() {
 
       {selectedRowKeys.length > 0 && (
         <div style={{ marginBottom: 16, padding: '8px 16px', background: '#f6f6f6', borderRadius: 6, display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span>已选择 {selectedRowKeys.length} 项</span>
+          <span>{t('translation.selectedCount', { count: selectedRowKeys.length })}</span>
           <Button
             size="small"
             type="primary"
@@ -389,6 +391,8 @@ export default function TranslationWorkbench() {
           </Button>
           <Popconfirm
             title={t('translation.batchMarkIncomplete')}
+            okText={t('common.ok')}
+            cancelText={t('common.cancel')}
             onConfirm={() => handleBatchComplete(false)}
           >
             <Button size="small" icon={<CloseOutlined />} danger>
@@ -428,6 +432,8 @@ export default function TranslationWorkbench() {
         open={modalOpen}
         onOk={handleAddSubmit}
         onCancel={() => setModalOpen(false)}
+        okText={t('common.ok')}
+        cancelText={t('common.cancel')}
         destroyOnHidden
       >
         <Form form={form} layout="vertical">
