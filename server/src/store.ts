@@ -277,6 +277,36 @@ function getDefaultContents(): Content[] {
   ];
 }
 
+function getDefaultVersions(): LocaleBundleVersion[] {
+  const translations = getDefaultTranslations();
+  const languages = getDefaultLanguages();
+  const versions: LocaleBundleVersion[] = [];
+
+  for (const lang of languages) {
+    const snapshot: Record<string, string> = {};
+    for (const entry of translations) {
+      const v = entry.translations[lang.code];
+      if (v && v.trim()) {
+        snapshot[entry.key] = v;
+      }
+    }
+    versions.push({
+      id: `v1-${lang.code}`,
+      version: '1.0.0',
+      lang: lang.code,
+      description: 'Initial version',
+      snapshot,
+      changes: [],
+      isCurrent: true,
+      createdAt: now(),
+      createdBy: 'System',
+      publishedAt: now(),
+      publishedBy: 'System',
+    });
+  }
+  return versions;
+}
+
 function initializeData() {
   ensureDataDir();
 
@@ -299,7 +329,7 @@ function initializeData() {
   }
 
   if (!fs.existsSync(VERSIONS_FILE)) {
-    fs.writeFileSync(VERSIONS_FILE, JSON.stringify([], null, 2));
+    fs.writeFileSync(VERSIONS_FILE, JSON.stringify(getDefaultVersions(), null, 2));
   }
 }
 

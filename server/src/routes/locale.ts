@@ -1,19 +1,42 @@
 import { Router } from 'express';
-import { readLanguages, readTranslations } from '../store.js';
+import { readLanguages, readTranslations, readVersions } from '../store.js';
 import type { LocaleBundle } from '../types';
 
 const router = Router();
 
-function buildLocaleBundle(langCode: string, fallbackCode: string): LocaleBundle {
+function getPublishedSnapshot(langCode: string): Record<string, string> | null {
+  const versions = readVersions();
+  const published = versions
+    .filter((v) => v.lang === langCode && v.publishedAt)
+    .sort((a, b) => new Date(b.publishedAt!).getTime() - new Date(a.publishedAt!).getTime())[0];
+  
+  return published ? published.snapshot : null;
+}
+
+function getEffectiveFlatMap(langCode: string): Record<string, string> {
+  const snapshot = getPublishedSnapshot(langCode);
+  if (snapshot) {
+    return snapshot;
+  }
   const translations = readTranslations();
+  const map: Record<string, string> = {};
+  for (const entry of translations) {
+    const v = entry.translations[langCode];
+    if (v && v.trim()) map[entry.key] = v;
+  }
+  return map;
+}
+
+function buildLocaleBundle(langCode: string, fallbackCode: string): LocaleBundle {
+  const targetMap = getEffectiveFlatMap(langCode);
+  const fallbackMap = langCode !== fallbackCode ? getEffectiveFlatMap(fallbackCode) : {};
   const bundle: LocaleBundle = {};
 
-  for (const entry of translations) {
-    const value = entry.translations[langCode]?.trim()
-      ? entry.translations[langCode]
-      : entry.translations[fallbackCode] || '';
+  const allKeys = new Set([...Object.keys(targetMap), ...Object.keys(fallbackMap)]);
 
-    const parts = entry.key.split('.');
+  for (const key of allKeys) {
+    const value = targetMap[key]?.trim() ? targetMap[key] : fallbackMap[key] || '';
+    const parts = key.split('.');
     let current: LocaleBundle | string = bundle;
 
     for (let i = 0; i < parts.length - 1; i++) {
@@ -35,14 +58,14 @@ function buildLocaleBundle(langCode: string, fallbackCode: string): LocaleBundle
 }
 
 function buildFlatBundle(langCode: string, fallbackCode: string): Record<string, string> {
-  const translations = readTranslations();
+  const targetMap = getEffectiveFlatMap(langCode);
+  const fallbackMap = langCode !== fallbackCode ? getEffectiveFlatMap(fallbackCode) : {};
   const bundle: Record<string, string> = {};
 
-  for (const entry of translations) {
-    const value = entry.translations[langCode]?.trim()
-      ? entry.translations[langCode]
-      : entry.translations[fallbackCode] || '';
-    bundle[entry.key] = value;
+  const allKeys = new Set([...Object.keys(targetMap), ...Object.keys(fallbackMap)]);
+
+  for (const key of allKeys) {
+    bundle[key] = targetMap[key]?.trim() ? targetMap[key] : fallbackMap[key] || '';
   }
 
   return bundle;
@@ -89,15 +112,17 @@ router.get('/:lang/diff', (req, res) => {
     });
   }
 
-  const translations = readTranslations();
+  const targetMap = getEffectiveFlatMap(lang);
+  const defaultMap = getEffectiveFlatMap(defaultLang.code);
   const diff: Record<string, string> = {};
 
-  for (const entry of translations) {
-    const targetValue = entry.translations[lang];
-    const defaultValue = entry.translations[defaultLang.code];
+  const allKeys = new Set([...Object.keys(targetMap), ...Object.keys(defaultMap)]);
 
+  for (const key of allKeys) {
+    const targetValue = targetMap[key];
+    const defaultValue = defaultMap[key];
     if (targetValue && targetValue.trim() !== '' && targetValue !== defaultValue) {
-      diff[entry.key] = targetValue;
+      diff[key] = targetValue;
     }
   }
 

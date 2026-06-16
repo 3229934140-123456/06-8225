@@ -6,7 +6,6 @@ import {
   Space,
   Tabs,
   Input,
-  DatePicker,
   InputNumber,
   Tag,
   Popconfirm,
@@ -42,6 +41,18 @@ export default function ContentEditPage() {
   const [selectedTypeId, setSelectedTypeId] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
+  const initEmptyContent = (typeId: string): Content => ({
+    id: '',
+    typeId,
+    typeName: types.find((t) => t.id === typeId)?.name || '',
+    status: 'draft',
+    author: 'System',
+    fields: {},
+    languageProgress: [],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  });
+
   useEffect(() => {
     const init = async () => {
       setLoading(true);
@@ -54,7 +65,21 @@ export default function ContentEditPage() {
         setLangs(langList.filter((l: any) => l.isEnabled));
 
         if (isNew) {
-          if (typeList.length > 0) setSelectedTypeId(typeList[0].id);
+          if (typeList.length > 0) {
+            const typeId = typeList[0].id;
+            setSelectedTypeId(typeId);
+            setContent({
+              id: '',
+              typeId,
+              typeName: typeList[0].name,
+              status: 'draft',
+              author: 'System',
+              fields: {},
+              languageProgress: [],
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            });
+          }
         } else if (id) {
           const c = await contentsApi.get(id);
           setContent(c);
@@ -75,7 +100,48 @@ export default function ContentEditPage() {
     [types, selectedTypeId]
   );
 
-  const missingLangs = progress.filter((p) => !p.filled);
+  const computeLiveProgress = useMemo((): ContentLanguageProgress[] => {
+    if (!contentType || !content) return [];
+    const requiredFields = contentType.fields.filter((f) => f.required);
+    return langs.map((lang) => {
+      const missing: string[] = [];
+      for (const f of requiredFields) {
+        const valueLang = f.translatable ? lang.code : 'zh-CN';
+        const value = content.fields?.[f.key]?.[valueLang];
+        if (!value || !String(value).trim()) {
+          missing.push(f.label);
+        }
+      }
+      return {
+        lang: lang.code,
+        filled: missing.length === 0,
+        missingFields: missing,
+        percent: requiredFields.length > 0
+          ? Math.round(((requiredFields.length - missing.length) / requiredFields.length) * 100)
+          : 100,
+      };
+    });
+  }, [contentType, content, langs]);
+
+  const missingLangs = computeLiveProgress.filter((p) => !p.filled);
+
+  const handleTypeChange = (typeId: string) => {
+    setSelectedTypeId(typeId);
+    if (isNew) {
+      const ct = types.find((t) => t.id === typeId);
+      setContent({
+        id: '',
+        typeId,
+        typeName: ct?.name || '',
+        status: 'draft',
+        author: 'System',
+        fields: {},
+        languageProgress: [],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      });
+    }
+  };
 
   const handleFieldChange = (fieldKey: string, lang: string, value: string) => {
     if (!content) return;
@@ -84,7 +150,7 @@ export default function ContentEditPage() {
       fields: {
         ...content.fields,
         [fieldKey]: {
-          ...content.fields[fieldKey],
+          ...(content.fields?.[fieldKey] || {}),
           [lang]: value,
         },
       },
@@ -115,7 +181,8 @@ export default function ContentEditPage() {
   };
 
   const renderField = (field: any, lang: string, readonly = false) => {
-    const value = content?.fields?.[field.key]?.[lang] || '';
+    const valueLang = field.translatable ? lang : 'zh-CN';
+    const value = content?.fields?.[field.key]?.[valueLang] || '';
     const style = readonly ? { background: '#f5f5f5' } : undefined;
 
     if (readonly) {
@@ -133,7 +200,7 @@ export default function ContentEditPage() {
         <TextArea
           value={value}
           rows={6}
-          onChange={(e) => handleFieldChange(field.key, lang, e.target.value)}
+          onChange={(e) => handleFieldChange(field.key, valueLang, e.target.value)}
         />
       );
     }
@@ -142,7 +209,7 @@ export default function ContentEditPage() {
         <Input
           value={value}
           placeholder="https://..."
-          onChange={(e) => handleFieldChange(field.key, lang, e.target.value)}
+          onChange={(e) => handleFieldChange(field.key, valueLang, e.target.value)}
         />
       );
     }
@@ -151,7 +218,7 @@ export default function ContentEditPage() {
         <Input
           type="date"
           value={value}
-          onChange={(e) => handleFieldChange(field.key, lang, e.target.value)}
+          onChange={(e) => handleFieldChange(field.key, valueLang, e.target.value)}
         />
       );
     }
@@ -161,7 +228,7 @@ export default function ContentEditPage() {
           style={{ width: '100%' }}
           value={value ? Number(value) : undefined}
           onChange={(v) =>
-            handleFieldChange(field.key, lang, v !== null && v !== undefined ? String(v) : '')
+            handleFieldChange(field.key, valueLang, v !== null && v !== undefined ? String(v) : '')
           }
         />
       );
@@ -169,7 +236,7 @@ export default function ContentEditPage() {
     return (
       <Input
         value={value}
-        onChange={(e) => handleFieldChange(field.key, lang, e.target.value)}
+        onChange={(e) => handleFieldChange(field.key, valueLang, e.target.value)}
       />
     );
   };
@@ -203,7 +270,7 @@ export default function ContentEditPage() {
             <span>{t('content.type')}:</span>
             <Select
               value={selectedTypeId}
-              onChange={setSelectedTypeId}
+              onChange={handleTypeChange}
               style={{ width: 200 }}
             >
               {types.map((t) => (
@@ -268,7 +335,7 @@ export default function ContentEditPage() {
               activeKey={activeLang}
               onChange={setActiveLang}
               items={langs.map((l) => {
-                const pg = progress.find((p) => p.lang === l.code);
+                const pg = computeLiveProgress.find((p) => p.lang === l.code);
                 return {
                   key: l.code,
                   label: (
@@ -288,7 +355,6 @@ export default function ContentEditPage() {
                       <Row gutter={[16, 16]}>
                         {contentType.fields.map((f) => {
                           const nonTranslatable = !f.translatable;
-                          const shouldShow = !nonTranslatable || l.isDefault || l.code === 'zh-CN';
                           return (
                             <Col xs={24} key={f.key}>
                               <Typography.Title level={5} style={{ marginBottom: 4 }}>
@@ -305,7 +371,7 @@ export default function ContentEditPage() {
                                   </Tag>
                                 )}
                               </Typography.Title>
-                              {renderField(f, nonTranslatable ? 'zh-CN' : l.code)}
+                              {renderField(f, l.code)}
                             </Col>
                           );
                         })}
